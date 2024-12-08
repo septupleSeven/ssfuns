@@ -7,35 +7,53 @@ import { SunGlow } from "../scenes/models/SunGlow";
 import { Orbit } from "../scenes/models/Orbit";
 import { Planet } from "../scenes/models/Planet";
 import { SunLight } from "../scenes/tools/Sunlight";
+import { Composer } from "../utils/Composer";
+import { orbitsConfig, planetsConfig } from "../constants/constants";
 
 export class Space {
     sizer: Sizer;
     camera: Camera;
     renderer: Renderer;
     scene: THREE.Scene;
+
     canvas: HTMLCanvasElement;
+    nameWrap: HTMLElement;
 
     textureLoader: THREE.TextureLoader;
     cubeTextureLoader: THREE.CubeTextureLoader;
+
+    raycaster:THREE.Raycaster;
+    pointer:THREE.Vector2;
+    
+    composer: Composer;
 
     sun: Sun;
     sunGlow: SunGlow;
     sunLight: SunLight;
 
-    orbit:Orbit;
-    planet:Planet;
+    planets: Planet[];
+    orbits: Orbit[];
 
-    constructor(canvas:HTMLCanvasElement) {
+    constructor(
+        canvas:HTMLCanvasElement,
+        nameWrap: HTMLElement,
+    ) {
         this.canvas = canvas;
+        this.nameWrap = nameWrap;
 
         this.sizer = new Sizer();
-        this.camera = new Camera(this);
+        this.camera = new Camera(this, {});
         this.scene = new THREE.Scene();
         this.renderer = new Renderer(this);
         
         this.textureLoader = new THREE.TextureLoader().setPath("../../assets/textures/")
         this.cubeTextureLoader = new THREE.CubeTextureLoader().setPath("../../assets/cubeMap/")
-        
+
+        this.raycaster = new THREE.Raycaster();
+        this.pointer = new THREE.Vector2();
+
+        this.composer = new Composer(this);
+
         this.sun = new Sun(this, {
             rotation: 0.001
         });
@@ -47,18 +65,34 @@ export class Space {
             decay: 10,
         })
 
-        this.orbit = new Orbit({
-            radius: 2,
-            segments: 100
-        });
-        this.planet = new Planet(
-            this,
-            {
-                texture: "mecury_texture.jpg",
-                orbitRadius: 2,
-                planetRadius: 0.1,
-            }
-        )
+        this.planets = [];
+
+        for(let i = 0; i < planetsConfig.length; i++){
+            const planetIns =  new Planet(
+                this,
+                planetsConfig[i]
+            )
+            this.planets.push(planetIns);
+        }
+
+        this.orbits = [];
+
+        for (const key in orbitsConfig) {
+            const{ 
+                radius, 
+                name,
+                orbitColor
+            } = orbitsConfig[key];
+
+            const orbitIns = new Orbit({
+                radius,
+                segments: 100,
+                name,
+                orbitColor
+            });
+
+            this.orbits.push(orbitIns);
+        }
 
         this.camera.position.set(0, 0, 3);
 
@@ -70,16 +104,38 @@ export class Space {
             this.sun,
             this.sunGlow,
             this.sunLight,
-            this.orbit,
-            this.planet,
+            ...this.orbits,
+            ...this.planets,
             // lightHelper,
         );
 
         this.drawCubeTexture();
+
+        window.addEventListener("pointermove", e => {
+            const target = this.handlePointerDown(e);
+            const targetPlanet = this.planets.find(
+                planet => target && planet.name === target.name
+            );
+
+            if(target){
+                this.composer.outLinePass.selectedObjects = [target];
+            }else{
+                this.composer.outLinePass.selectedObjects = [];
+                this.planets.forEach(planet => {
+                    if(!planet.isActive) planet.isOrbitRevolution = true
+                })
+            }
+
+            if(targetPlanet){
+                targetPlanet.isOrbitRevolution = false;
+            }
+
+        });
     }
 
     resize(){
         this.camera.resize();
+        this.composer.resize();
         this.renderer.resize();
     }
 
@@ -89,10 +145,12 @@ export class Space {
         this.sun.update();
         this.sunGlow.update();
 
-        this.planet.update();
-        // console.log(this.planet.position)
+        // this.planet.update();
+        this.planets.forEach(
+            planet => {planet.update();}
+        )
 
-        this.renderer.update();
+        this.composer.update();
     }
 
     drawCubeTexture(){
@@ -107,6 +165,19 @@ export class Space {
 
         this.scene.background = cubeTexture;
     }
-}
 
-// export const sSpace = new Space(document.querySelector("#canvas")!)
+    handlePointerDown(e:PointerEvent){
+        this.pointer.x = (e.clientX / window.innerWidth - 0.5) * 2;
+        this.pointer.y = -(e.clientY / window.innerHeight - 0.5) * 2
+        
+        this.raycaster.setFromCamera(this.pointer, this.camera);
+        this.raycaster.layers.set(7);
+
+        const intersetsArr =  this.raycaster.intersectObjects(this.scene.children);
+        
+        if(intersetsArr[0]){
+            const target = intersetsArr[0].object;
+            return target;
+        }
+    }
+}

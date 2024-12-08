@@ -30,6 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 html, body {
 	box-sizing: border-box;
+	overflow: hidden;
 }
 ol, ul {
 	list-style: none;

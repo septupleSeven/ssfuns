@@ -27,6 +27,9 @@ export class Sun extends THREE.Mesh {
         const geometry = new THREE.SphereGeometry(1, 40, 40);
 
         super(geometry, material);
+
+        this.layers.set(7)
+        this.name = "SUN"
         
         this.config = config;
     }

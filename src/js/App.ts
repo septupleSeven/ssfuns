@@ -1,7 +1,10 @@
 import { Space } from "./core/Space";
 
 export default function (){
-    const space = new Space(document.querySelector("#canvas")!);
+    const space = new Space(
+        document.querySelector("#canvas")!,
+        document.querySelector("#nameWrap")!
+    );
 
     const update = () => {
         space.update();
@@ -10,6 +13,7 @@ export default function (){
 
     const initialize = () => {
         space.resize();
+        window.addEventListener("resize", () => space.resize());
         update();
     };
 
