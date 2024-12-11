@@ -23,12 +23,21 @@ interface oribitsConfigProps {
 
 export const planetsConfig:planetsConfigProps[] = [
     {
-        texture: "mecury_texture.jpg",
+        texture: "mercury_texture.jpg",
         orbitRadius: 2,
         planetRadius: 0.1,
-        name: "MECURY",
+        name: "MERCURY",
         nameTag: "수성",
         orbitColor: 0xffffff,
+    },
+    {
+        texture: "venus_texture.jpg",
+        orbitRadius: 2.5,
+        planetRadius: 0.2,
+        name: "VENUS",
+        nameTag: "금성",
+        orbitColor: 0xffffff,
+        orbitAngle: 0.0015
     }
 ]
 
@@ -56,3 +65,18 @@ function createOrbitsConfig(
 }
 
 export const orbitsConfig = createOrbitsConfig(planetsConfig);
+
+export async function getModalData (url: string) {
+    try {
+        const res = await fetch(url);
+
+        if(!res.ok){
+            throw new Error("Error: 500");
+        }
+
+        return await res.json();
+    } catch (error: unknown) {
+        console.error("Error:", error);
+        return null;
+    }
+}

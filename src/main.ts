@@ -1,3 +1,3 @@
 import App from "./js/App";
 
-App();
+await App();

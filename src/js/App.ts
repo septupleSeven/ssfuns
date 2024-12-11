@@ -1,21 +1,31 @@
+import { getModalData } from "./constants/constants";
 import { Space } from "./core/Space";
 
-export default function (){
-    const space = new Space(
-        document.querySelector("#canvas")!,
-        document.querySelector("#nameWrap")!
-    );
+export default async function (){
+    const modalData = await getModalData("../data/modalData.json");
 
-    const update = () => {
-        space.update();
-        requestAnimationFrame(() => update());
+    if(modalData){
+        const space = new Space(
+            document.querySelector("#canvas")!,
+            document.querySelector("#name_wrap")!,
+            document.querySelector("#modal")!,
+            modalData
+        );
+    
+        const update = () => {
+            space.update();
+            requestAnimationFrame(() => update());
+        }
+    
+        const initialize = () => {
+            space.resize();
+            window.addEventListener("resize", () => space.resize());
+            update();
+        };
+    
+        initialize();
+    }else{
+        console.log("Initialize Failed");
     }
 
-    const initialize = () => {
-        space.resize();
-        window.addEventListener("resize", () => space.resize());
-        update();
-    };
-
-    initialize();
 }

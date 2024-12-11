@@ -1,0 +1,112 @@
+{
+    "MERCURY": {
+        "imgSrc": {
+            "pc": "assets/images/test.jpg",
+            "mo": "assets/images/test.jpg"
+        },
+        "titleContainer": {
+            "title": "수성",
+            "subtitles": [
+                "Mercury",
+                "水星",
+                "&#9791;"
+            ]
+        },
+        "contents": [
+            {
+                "contentsTitle": "정보",
+                "constentsList": [
+                    {
+                        "title": "반지름",
+                        "desc": "약 2,440 km (지구의 약 38%)"
+                    },
+                    {
+                        "title": "공전 주기",
+                        "desc": "약 88일"
+                    }
+                ]
+            },
+            {
+                "contentsTitle": "이야깃거리",
+                "constentsList": [
+                    {
+                        "title": "수성의 기온 변동",
+                        "desc": "수성은 태양에 가장 가까운 행성으로, 낮에는 표면 온도가 약 430도까지 올라가지만, 밤에는 영하 180도까지 떨어집니다. 이렇게 극단적인 온도 변동은 대기가 거의 없기 때문에 발생합니다."
+                    }
+                ]
+            },
+            {
+                "contentsTitle": "미디어",
+                "constentsList": [
+                    {
+                        "title": "서적",
+                        "desc": "'The Mercury 13: The True Story of Thirteen Women and the Dream of Space Flight' - Martha Ackmann"
+                    },
+                    {
+                        "title": "영상",
+                        "desc": "'Messenger: Journey to Mercury' - NASA"
+                    },
+                    {
+                        "title": "영상",
+                        "desc": "'Mercury: The Story So Far' - BBC"
+                    }
+                ]
+            }
+        ]
+    },
+    "VENUS": {
+        "imgSrc": {
+            "pc": "assets/images/test.jpg",
+            "mo": "assets/images/test.jpg"
+        },
+        "titleContainer": {
+            "title": "금성",
+            "subtitles": [
+                "Venus",
+                "金星",
+                "&#9792;"
+            ]
+        },
+        "contents": [
+            {
+                "contentsTitle": "정보",
+                "constentsList": [
+                    {
+                        "title": "반지름",
+                        "desc": "약 2,440 km (지구의 약 38%)"
+                    },
+                    {
+                        "title": "공전 주기",
+                        "desc": "약 88일"
+                    }
+                ]
+            },
+            {
+                "contentsTitle": "이야깃거리",
+                "constentsList": [
+                    {
+                        "title": "수성의 기온 변동",
+                        "desc": "수성은 태양에 가장 가까운 행성으로, 낮에는 표면 온도가 약 430도까지 올라가지만, 밤에는 영하 180도까지 떨어집니다. 이렇게 극단적인 온도 변동은 대기가 거의 없기 때문에 발생합니다."
+                    }
+                ]
+            },
+            {
+                "contentsTitle": "미디어",
+                "constentsList": [
+                    {
+                        "title": "서적",
+                        "desc": "'The Mercury 13: The True Story of Thirteen Women and the Dream of Space Flight' - Martha Ackmann"
+                    },
+                    {
+                        "title": "영상",
+                        "desc": "'Messenger: Journey to Mercury' - NASA"
+                    },
+                    {
+                        "title": "영상",
+                        "desc": "'Mercury: The Story So Far' - BBC"
+                    }
+                ]
+            }
+        ]
+    }
+}

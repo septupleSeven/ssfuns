@@ -56,17 +56,26 @@ export class Planet extends THREE.Mesh {
 
         this.isOrbitRevolution = true;
         this.isActive = false;
+
+        this.nameTag.addEventListener("pointerenter", e => {
+            const nameTag = e.target as HTMLElement;
+            this.space.events.handlePointerMove(e, true, nameTag.dataset.planet);
+        });
+        this.nameTag.addEventListener("pointerdown", e => {
+            const nameTag = e.target as HTMLElement;
+            this.space.events.handlePointerDown(e, true, nameTag.dataset.planet);
+        });
     }
 
     update(){
         if(this.isOrbitRevolution){
-            this.orbitAngle += this.config.orbitAngle!;
+            this.orbitAngle -= this.config.orbitAngle!;
         }
 
         this.position.x = Math.cos(this.orbitAngle) * this.config.orbitRadius + this.config.orbitDistanceX!;
         this.position.z = Math.sin(this.orbitAngle) * this.config.orbitRadius + this.config.orbitDistanceZ!;
 
-        this.rotation.y -= this.config.rotation!;
+        this.rotation.y += this.config.rotation!;
 
         const NDCPos = this.getNDC();
         this.setNameTagPos(NDCPos);
@@ -89,6 +98,7 @@ export class Planet extends THREE.Mesh {
         nameVal: string
     ){
         const nameTag = document.createElement("span");
+        nameTag.dataset.planet = this.name;
         nameTag.innerText = nameVal;
         
         wrapper.appendChild(nameTag);

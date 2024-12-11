@@ -9,175 +9,223 @@ import { Planet } from "../scenes/models/Planet";
 import { SunLight } from "../scenes/tools/Sunlight";
 import { Composer } from "../utils/Composer";
 import { orbitsConfig, planetsConfig } from "../constants/constants";
+import gsap from "gsap";
+import { Modal, modalDataProps } from "../utils/Modal";
+import { Events } from "../utils/Events";
+import GUI from "lil-gui";
+import { GLTFLoader } from "three-stdlib";
 
 export class Space {
-    sizer: Sizer;
-    camera: Camera;
-    renderer: Renderer;
-    scene: THREE.Scene;
+  sizer: Sizer;
+  camera: Camera;
+  renderer: Renderer;
+  scene: THREE.Scene;
 
-    canvas: HTMLCanvasElement;
-    nameWrap: HTMLElement;
+  canvas: HTMLCanvasElement;
+  nameWrap: HTMLElement;
+  modalNode: HTMLElement;
 
-    textureLoader: THREE.TextureLoader;
-    cubeTextureLoader: THREE.CubeTextureLoader;
+  modal: Modal;
+  modalData: Record<string, any>;
 
-    raycaster:THREE.Raycaster;
-    pointer:THREE.Vector2;
-    
-    composer: Composer;
+  textureLoader: THREE.TextureLoader;
+  cubeTextureLoader: THREE.CubeTextureLoader;
+  gltfLoader: GLTFLoader;
 
-    sun: Sun;
-    sunGlow: SunGlow;
-    sunLight: SunLight;
+  raycaster: THREE.Raycaster;
+  pointer: THREE.Vector2;
 
-    planets: Planet[];
-    orbits: Orbit[];
+  composer: Composer;
 
-    constructor(
-        canvas:HTMLCanvasElement,
-        nameWrap: HTMLElement,
-    ) {
-        this.canvas = canvas;
-        this.nameWrap = nameWrap;
+  sun: Sun;
+  sunGlow: SunGlow;
+  sunLight: SunLight;
 
-        this.sizer = new Sizer();
-        this.camera = new Camera(this, {});
-        this.scene = new THREE.Scene();
-        this.renderer = new Renderer(this);
-        
-        this.textureLoader = new THREE.TextureLoader().setPath("../../assets/textures/")
-        this.cubeTextureLoader = new THREE.CubeTextureLoader().setPath("../../assets/cubeMap/")
+  planets: Planet[];
+  orbits: Orbit[];
 
-        this.raycaster = new THREE.Raycaster();
-        this.pointer = new THREE.Vector2();
+  apollo!: THREE.Group;
 
-        this.composer = new Composer(this);
+  events: Events;
 
-        this.sun = new Sun(this, {
-            rotation: 0.001
-        });
-        this.sunGlow = new SunGlow(this);
-        this.sunLight = new SunLight({
-            color: 0xffffff,
-            intensity: 1000,
-            distance: 1000,
-            decay: 10,
-        })
+  isStart: boolean;
 
-        this.planets = [];
+  constructor(
+    canvas: HTMLCanvasElement,
+    nameWrap: HTMLElement,
+    modalNode: HTMLElement,
+    modalData: Record<string, modalDataProps>
+  ) {
+    this.canvas = canvas;
+    this.nameWrap = nameWrap;
+    this.modalNode = modalNode;
 
-        for(let i = 0; i < planetsConfig.length; i++){
-            const planetIns =  new Planet(
-                this,
-                planetsConfig[i]
-            )
-            this.planets.push(planetIns);
-        }
+    this.modalData = modalData;
+    this.modal = new Modal(this, this.modalNode, this.modalData);
 
-        this.orbits = [];
+    this.sizer = new Sizer();
+    this.camera = new Camera(this, {});
+    this.scene = new THREE.Scene();
+    this.renderer = new Renderer(this);
 
-        for (const key in orbitsConfig) {
-            const{ 
-                radius, 
-                name,
-                orbitColor
-            } = orbitsConfig[key];
+    this.textureLoader = new THREE.TextureLoader().setPath(
+      "../../assets/textures/"
+    );
+    this.cubeTextureLoader = new THREE.CubeTextureLoader().setPath(
+      "../../assets/cubeMap/"
+    );
+    this.gltfLoader = new GLTFLoader().setPath(
+      "../../assets/models/"
+    );
 
-            const orbitIns = new Orbit({
-                radius,
-                segments: 100,
-                name,
-                orbitColor
-            });
+    this.raycaster = new THREE.Raycaster();
+    this.pointer = new THREE.Vector2();
 
-            this.orbits.push(orbitIns);
-        }
+    this.composer = new Composer(this);
 
-        this.camera.position.set(0, 0, 3);
+    this.sun = new Sun(this, {
+      rotation: 0.001,
+    });
+    this.sunGlow = new SunGlow(this);
+    this.sunLight = new SunLight({
+      color: 0xffffff,
+      intensity: 1000,
+      distance: 10000,
+      decay: 8.5,
+    });
 
-        // const lightHelper = new THREE.PointLightHelper(
-        //     this.sunLight
-        // )
+    this.planets = [];
 
-        this.scene.add(
-            this.sun,
-            this.sunGlow,
-            this.sunLight,
-            ...this.orbits,
-            ...this.planets,
-            // lightHelper,
-        );
-
-        this.drawCubeTexture();
-
-        window.addEventListener("pointermove", e => {
-            const target = this.handlePointerDown(e);
-            const targetPlanet = this.planets.find(
-                planet => target && planet.name === target.name
-            );
-
-            if(target){
-                this.composer.outLinePass.selectedObjects = [target];
-            }else{
-                this.composer.outLinePass.selectedObjects = [];
-                this.planets.forEach(planet => {
-                    if(!planet.isActive) planet.isOrbitRevolution = true
-                })
-            }
-
-            if(targetPlanet){
-                targetPlanet.isOrbitRevolution = false;
-            }
-
-        });
+    for (let i = 0; i < planetsConfig.length; i++) {
+      const planetIns = new Planet(this, planetsConfig[i]);
+      this.planets.push(planetIns);
     }
 
-    resize(){
-        this.camera.resize();
-        this.composer.resize();
-        this.renderer.resize();
+    this.orbits = [];
+
+    for (const key in orbitsConfig) {
+      const { radius, name, orbitColor } = orbitsConfig[key];
+
+      const orbitIns = new Orbit({
+        radius,
+        segments: 100,
+        name,
+        orbitColor,
+      });
+
+      this.orbits.push(orbitIns);
     }
 
-    update(){
-        this.camera.update();
+    this.events = new Events(this);
 
-        this.sun.update();
-        this.sunGlow.update();
+    // const lightHelper = new THREE.PointLightHelper(
+    //     this.sunLight
+    // )
 
-        // this.planet.update();
-        this.planets.forEach(
-            planet => {planet.update();}
-        )
+    // const gui = new GUI();
 
-        this.composer.update();
-    }
+    // const cameraRotaionFolder = gui.addFolder("cameraRotaion");
+    // cameraRotaionFolder.add(this.camera.rotation, "x").max(3).min(-3).step(0.1);
+    // cameraRotaionFolder.add(this.camera.rotation, "y").max(3).min(-3).step(0.1);
+    // cameraRotaionFolder.add(this.camera.rotation, "z").max(3).min(-3).step(0.1);
 
-    drawCubeTexture(){
-        const cubeTexture = this.cubeTextureLoader.load([
-            "px.png",
-            "nx.png",
-            "py.png",
-            "ny.png",
-            "pz.png",
-            "nz.png",
-        ]);
+    // const cameraPositionFolder = gui.addFolder("cameraPosition");
+    // cameraPositionFolder
+    //   .add(this.camera.position, "x")
+    //   .max(5)
+    //   .min(-5)
+    //   .step(0.1);
+    // cameraPositionFolder
+    //   .add(this.camera.position, "y")
+    //   .max(5)
+    //   .min(-5)
+    //   .step(0.1);
+    // cameraPositionFolder
+    //   .add(this.camera.position, "z")
+    //   .max(5)
+    //   .min(-5)
+    //   .step(0.1);
 
-        this.scene.background = cubeTexture;
-    }
+    // gui.hide();
 
-    handlePointerDown(e:PointerEvent){
-        this.pointer.x = (e.clientX / window.innerWidth - 0.5) * 2;
-        this.pointer.y = -(e.clientY / window.innerHeight - 0.5) * 2
-        
-        this.raycaster.setFromCamera(this.pointer, this.camera);
-        this.raycaster.layers.set(7);
+    this.scene.add(
+      this.sun,
+      this.sunGlow,
+      this.sunLight,
+      ...this.orbits,
+      ...this.planets
+      // lightHelper,
+    );
 
-        const intersetsArr =  this.raycaster.intersectObjects(this.scene.children);
-        
-        if(intersetsArr[0]){
-            const target = intersetsArr[0].object;
-            return target;
-        }
-    }
+    this.gltfLoader.load("apollo/scene.gltf", gltf => {
+      this.apollo = gltf.scene;
+      this.apollo.position.set(0, 2.5, -0.2);
+      this.apollo.rotation.set(Math.PI / 2, -Math.PI / 3, 0)
+      this.apollo.scale.set(0.1, 0.1, 0.1);
+      // this.apollo.traverse(child => {
+      //   if (child instanceof THREE.Mesh && child.material) {
+      //     child.material.side = THREE.DoubleSide;
+      //     child.material.depthWrite = true;
+      //   }
+      // })
+      this.scene.add(this.apollo);
+    });
+
+    this.drawCubeTexture();
+
+    window.addEventListener("pointermove", (e) => {
+      const nameTag = e.target as HTMLElement;
+      if (nameTag && nameTag.dataset.planet) {
+        this.events.handlePointerMove(e, true, nameTag.dataset.planet);
+      } else {
+        this.events.handlePointerMove(e);
+      }
+    });
+
+    window.addEventListener("pointerdown", (e) => {
+      const nameTag = e.target as HTMLElement;
+      if (nameTag && nameTag.dataset.planet) {
+        this.events.handlePointerDown(e, true, nameTag.dataset.planet);
+      } else {
+        this.events.handlePointerDown(e);
+      }
+    });
+
+    // window.addEventListener("wheel", () => {
+    //   console.log(this.camera.position)
+    // })
+  }
+
+  resize() {
+    // this.camera.resize();
+    this.composer.resize();
+    this.renderer.resize();
+  }
+
+  update() {
+    this.camera.update();
+
+    this.sun.update();
+    this.sunGlow.update();
+
+    this.planets.forEach((planet) => {
+      planet.update();
+    });
+
+    this.composer.update();
+  }
+
+  drawCubeTexture() {
+    const cubeTexture = this.cubeTextureLoader.load([
+      "px.png",
+      "nx.png",
+      "py.png",
+      "ny.png",
+      "pz.png",
+      "nz.png",
+    ]);
+
+    this.scene.background = cubeTexture;
+  }
+
 }

@@ -9,6 +9,7 @@ interface SunConfigProps {
 
 export class Sun extends THREE.Mesh {
     config:SunConfigProps;
+    isActive: boolean;
 
     constructor(space:Space, config:SunConfigProps) {
         const material = new THREE.ShaderMaterial({
@@ -32,9 +33,10 @@ export class Sun extends THREE.Mesh {
         this.name = "SUN"
         
         this.config = config;
+        this.isActive = false;
     }
     
     update(){
-        this.rotation.y -= this.config.rotation;
+        this.rotation.y += this.config.rotation;
     }
 }
