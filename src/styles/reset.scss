@@ -58,3 +58,10 @@ button{
     outline: 0;
     color: inherit;
 }
+
+img {
+    vertical-align: middle;
+    image-rendering: -webkit-optimize-contrast;
+    backface-visibility: hidden;
+    max-width: 100%;
+}

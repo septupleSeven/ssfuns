@@ -9,11 +9,20 @@ import { Planet } from "../scenes/models/Planet";
 import { SunLight } from "../scenes/tools/Sunlight";
 import { Composer } from "../utils/Composer";
 import { orbitsConfig, planetsConfig } from "../constants/constants";
-import gsap from "gsap";
 import { Modal, modalDataProps } from "../utils/Modal";
 import { Events } from "../utils/Events";
 import GUI from "lil-gui";
 import { GLTFLoader } from "three-stdlib";
+import { LoadHelper } from "../utils/Loader";
+
+interface SpaceConfigProps {
+  canvas: HTMLCanvasElement;
+  nameWrapNode: HTMLElement;
+  modalNode: HTMLElement;
+  modalData: Record<string, modalDataProps>;
+  introNode: HTMLElement;
+  loadingNode: HTMLElement;
+}
 
 export class Space {
   sizer: Sizer;
@@ -22,12 +31,15 @@ export class Space {
   scene: THREE.Scene;
 
   canvas: HTMLCanvasElement;
-  nameWrap: HTMLElement;
+  nameWrapNode: HTMLElement;
   modalNode: HTMLElement;
+  introNode: HTMLElement;
+  loadingNode: HTMLElement;
 
   modal: Modal;
   modalData: Record<string, any>;
 
+  loadingManager: THREE.LoadingManager;
   textureLoader: THREE.TextureLoader;
   cubeTextureLoader: THREE.CubeTextureLoader;
   gltfLoader: GLTFLoader;
@@ -49,18 +61,21 @@ export class Space {
   events: Events;
 
   isStart: boolean;
+  isModal: boolean;
 
   constructor(
-    canvas: HTMLCanvasElement,
-    nameWrap: HTMLElement,
-    modalNode: HTMLElement,
-    modalData: Record<string, modalDataProps>
+    config: SpaceConfigProps
   ) {
-    this.canvas = canvas;
-    this.nameWrap = nameWrap;
-    this.modalNode = modalNode;
+    this.isStart = false;
+    this.isModal = false;
 
-    this.modalData = modalData;
+    this.canvas = config.canvas;
+    this.nameWrapNode = config.nameWrapNode;
+    this.modalNode = config.modalNode;
+    this.introNode = config.introNode;
+    this.loadingNode = config.loadingNode;
+
+    this.modalData = config.modalData;
     this.modal = new Modal(this, this.modalNode, this.modalData);
 
     this.sizer = new Sizer();
@@ -68,13 +83,15 @@ export class Space {
     this.scene = new THREE.Scene();
     this.renderer = new Renderer(this);
 
-    this.textureLoader = new THREE.TextureLoader().setPath(
+    this.loadingManager = new LoadHelper(this);
+
+    this.textureLoader = new THREE.TextureLoader(this.loadingManager).setPath(
       "../../assets/textures/"
     );
-    this.cubeTextureLoader = new THREE.CubeTextureLoader().setPath(
+    this.cubeTextureLoader = new THREE.CubeTextureLoader(this.loadingManager).setPath(
       "../../assets/cubeMap/"
     );
-    this.gltfLoader = new GLTFLoader().setPath(
+    this.gltfLoader = new GLTFLoader(this.loadingManager).setPath(
       "../../assets/models/"
     );
 
@@ -159,15 +176,9 @@ export class Space {
 
     this.gltfLoader.load("apollo/scene.gltf", gltf => {
       this.apollo = gltf.scene;
-      this.apollo.position.set(0, 2.5, -0.2);
-      this.apollo.rotation.set(Math.PI / 2, -Math.PI / 3, 0)
+      this.apollo.position.set(-0.015, 2.5, 0.2);
+      this.apollo.rotation.set(-Math.PI / 2, Math.PI / 1.5, 0)
       this.apollo.scale.set(0.1, 0.1, 0.1);
-      // this.apollo.traverse(child => {
-      //   if (child instanceof THREE.Mesh && child.material) {
-      //     child.material.side = THREE.DoubleSide;
-      //     child.material.depthWrite = true;
-      //   }
-      // })
       this.scene.add(this.apollo);
     });
 
@@ -180,6 +191,7 @@ export class Space {
       } else {
         this.events.handlePointerMove(e);
       }
+
     });
 
     window.addEventListener("pointerdown", (e) => {
@@ -189,15 +201,25 @@ export class Space {
       } else {
         this.events.handlePointerDown(e);
       }
+
     });
 
-    // window.addEventListener("wheel", () => {
-    //   console.log(this.camera.position)
-    // })
+    this.introNode.addEventListener("click", () => {
+      this.events.startIntro();
+    })
+
+    window.addEventListener("wheel", () => {
+      console.log(this.camera.position.y)
+      this.events.hidePlanets();
+    })
+
+    // console.log(this.renderer.info);
   }
 
   resize() {
-    // this.camera.resize();
+    if(this.isStart){
+      this.camera.resize();
+    }
     this.composer.resize();
     this.renderer.resize();
   }

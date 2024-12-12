@@ -9,5 +9,27 @@ export default defineConfig({
         outDir: "../dist",
         emptyOutDir: true
     },
+    css: {
+        preprocessorOptions: {
+          scss: {
+            api: "modern",
+            additionalData: `
+                @use "./utils" as *;
+                @use "./reset" as *;
+                @use 'material-icons/iconfont/material-icons.css' as *;
+            `
+          }
+        }
+      }
+    // css: {
+    //     preprocessorOptions: {
+    //         scss: {
+    //             additionalData: `
+    //             @import "./variables";
+    //             @import "material-icons/iconfont/material-icons.css";
+    //             `
+    //         }
+    //     }
+    // }
     // plugins: [ vitePluginGLSL() ]
 })

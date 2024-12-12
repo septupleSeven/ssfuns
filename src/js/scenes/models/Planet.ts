@@ -50,7 +50,7 @@ export class Planet extends THREE.Mesh {
         this.name = config.name;
 
         this.nameTag = this.createNameTag(
-            this.space.nameWrap,
+            this.space.nameWrapNode,
             this.config.nameTag
         );
 

@@ -1,21 +1,42 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./styles/base.css">
-    <title>StarLifecycle</title>
-  </head>
-  <body>
-    <div id="name_wrap"></div>
-    <div id="app">
-      <canvas id="canvas"></canvas>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./styles/base.scss">
+  <title>StarLifecycle</title>
+</head>
+
+<body>
+  <div id="loader">
+    <div class="loader_wrap">
+      <div class="loader_contents"></div>
+      <p>Loading...</p>
     </div>
-    <div id="modal">
-      <button class="modal_close">
-        <span class="material-icons">close</span>
-      </button>
+  </div>
+  <div id="intro">
+    <div class="title_container">
+      <h1 class="title">SS<span>F</span>S</h1>
+      <p class="subtitle">Solar System's Fun Story</p>
     </div>
-    <script type="module" src="./main.ts"></script>
-  </body>
+    <button>
+      클릭하여 시작
+      <span class="material-icons">
+        arrow_forward
+      </span>
+    </button>
+  </div>
+  <div id="name_wrap"></div>
+  <div id="app">
+    <canvas id="canvas"></canvas>
+  </div>
+  <div id="modal">
+    <button class="modal_close">
+      <span class="material-icons">close</span>
+    </button>
+  </div>
+  <script type="module" src="./main.ts"></script>
+</body>
+
 </html>

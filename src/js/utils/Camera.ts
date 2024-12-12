@@ -29,7 +29,8 @@ export class Camera extends THREE.PerspectiveCamera {
     // this.rotation.x = -Math.PI / 2;
     // this.position.set(0, 5, 0);
     // this.position.y = 5;
-    this.position.y = 2.4;
+    // this.position.y = 5;
+    this.position.y = 2.45;
     this.addControls();
   }
 
@@ -39,7 +40,10 @@ export class Camera extends THREE.PerspectiveCamera {
     this.controls.dampingFactor = 0.1;
 
     this.controls.target.set(0, 2.5, 0);
-    this.controls.setPolarAngle(Math.PI / 1.3)
+    this.controls.setAzimuthalAngle(Math.PI / 1.5);
+
+    this.controls.enabled = false;
+    this.controls.autoRotate = true;
   }
 
   resize() {

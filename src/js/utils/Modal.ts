@@ -128,7 +128,11 @@ export class Modal {
       duration: 0.4,
       ease: "power1.in",
       onComplete: () => {
+        this.space.isModal = true;
         this.clearModalContents();
+        this.space.nameWrapNode.querySelectorAll("span").forEach(
+          el => {el.style.opacity = "1"}
+        )
       },
     });
   }

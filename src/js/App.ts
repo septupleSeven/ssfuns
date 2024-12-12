@@ -6,10 +6,14 @@ export default async function (){
 
     if(modalData){
         const space = new Space(
-            document.querySelector("#canvas")!,
-            document.querySelector("#name_wrap")!,
-            document.querySelector("#modal")!,
-            modalData
+            {
+                canvas: document.querySelector("#canvas")!,
+                nameWrapNode: document.querySelector("#name_wrap")!,
+                modalNode: document.querySelector("#modal")!,
+                introNode: document.querySelector("#intro")!,
+                loadingNode: document.querySelector("#loader")!,
+                modalData
+            }
         );
     
         const update = () => {
