@@ -1,3 +1,7 @@
 import App from "./js/App";
 
-await App();
+const app = async () => {
+    await App();
+}
+
+app();

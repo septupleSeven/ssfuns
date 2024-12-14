@@ -45,7 +45,7 @@ export class Planet extends THREE.Mesh {
             orbitColor: config.orbitColor ?? 0xffffff,
             orbitDistanceX: config.orbitDistanceX ?? 0,
             orbitDistanceZ: config.orbitDistanceZ ?? 0,
-            orbitSpeed: config.orbitSpeed ?? 0.01,
+            orbitSpeed: config.orbitSpeed ?? 0.001,
             rotationAngle: config.rotationAngle ?? 0,
             rotationSpeed: config.rotationSpeed ?? 0.001,
             layer: config.layer ?? 7

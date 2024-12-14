@@ -16,7 +16,6 @@ export default defineConfig({
             additionalData: `
                 @use "./utils" as *;
                 @use "./reset" as *;
-                @use 'material-icons/iconfont/material-icons.css' as *;
             `
           }
         }

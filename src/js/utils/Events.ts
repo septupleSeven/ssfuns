@@ -65,6 +65,10 @@ export class Events {
     return this.space.pBtnWrapNode;
   }
 
+  get headerNode() {
+    return this.space.headerNode;
+  }
+
   get satrunRing() {
     return this.space.satrunRing;
   }
@@ -140,10 +144,22 @@ export class Events {
         },
         "<"
       )
-      .to(this.pBtnWrapNode, {
-        opacity: 1,
-        duration: 1.2,
-      })
+      .to(
+        this.headerNode,
+        {
+          y: 0,
+          duration: 1.2,
+        },
+        "<"
+      )
+      .to(
+        this.pBtnWrapNode,
+        {
+          opacity: 1,
+          duration: 1.2,
+        },
+        "<"
+      )
       .to(
         this.nameWrapNode,
         {
@@ -195,21 +211,18 @@ export class Events {
     }
 
     if (target) {
-
       this.composer.outLinePass.selectedObjects = [target];
       document.body.style.cursor = "pointer";
       target.isOrbitRevolution = false;
-      if(target.name === "SATURN") this.satrunRing.isOrbitRevolution = false;
-    
+      if (target.name === "SATURN") this.satrunRing.isOrbitRevolution = false;
     } else {
-
       this.composer.outLinePass.selectedObjects = [];
       this.planets.forEach((planet) => {
         if (!planet.isActive) planet.isOrbitRevolution = true;
       });
 
-      if(!this.satrunRing.isActive) this.satrunRing.isOrbitRevolution = true;
-      
+      if (!this.satrunRing.isActive) this.satrunRing.isOrbitRevolution = true;
+
       document.body.style.cursor = "auto";
     }
   }
@@ -244,7 +257,7 @@ export class Events {
 
       target.isActive = true;
 
-      if(target.name === "SATURN") this.space.satrunRing.isActive = true;
+      if (target.name === "SATURN") this.space.satrunRing.isActive = true;
 
       const azimuthalAngle = {
         azimuthal: this.camera.controls.getAzimuthalAngle(),
@@ -255,8 +268,8 @@ export class Events {
 
       let calcedAzimuthalAngle = Math.atan2(targetZ, targetX);
 
-      if((targetX <= 0 && targetZ < 0) || (targetX >= 0 && targetZ > 0)){
-        calcedAzimuthalAngle += Math.PI
+      if ((targetX <= 0 && targetZ < 0) || (targetX >= 0 && targetZ > 0)) {
+        calcedAzimuthalAngle += Math.PI;
       }
 
       this.camera.controls.enabled = false;
@@ -340,7 +353,7 @@ export class Events {
               planet.isActive = false;
               planet.isOrbitRevolution = true;
 
-              if(planet.name === "SATURN") {
+              if (planet.name === "SATURN") {
                 this.satrunRing.isActive = false;
                 this.satrunRing.isOrbitRevolution = true;
               }
@@ -374,11 +387,10 @@ export class Events {
       window.getComputedStyle(document.querySelector("body")!).fontSize
     );
 
-    const currentPosVal = 
-    this.camera.controls.getPolarAngle() > 1.2
-    ? this.camera.position.z
-    : this.camera.position.y;
-    
+    const currentPosVal =
+      this.camera.controls.getPolarAngle() > 1.2
+        ? this.camera.position.z
+        : this.camera.position.y;
 
     const calcedSize = Math.min(
       bodyFontSize * 1.5,
@@ -394,10 +406,9 @@ export class Events {
 
     if (currentPosVal < 1.8) {
       this.space.nameWrapNode.style.opacity = "0";
-    }else{
+    } else {
       this.space.nameWrapNode.style.opacity = "1";
-    } 
-  
+    }
   }
 
   setCameraVertical() {

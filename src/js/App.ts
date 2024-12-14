@@ -13,6 +13,7 @@ export default async function (){
                 introNode: document.querySelector("#intro")!,
                 loadingNode: document.querySelector("#loader")!,
                 pBtnWrapNode: document.querySelector("#p_btn_wrap")!,
+                headerNode: document.querySelector("header")!,
                 modalData
             }
         );

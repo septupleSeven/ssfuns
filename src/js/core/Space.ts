@@ -11,7 +11,6 @@ import { Composer } from "../utils/Composer";
 import { orbitsConfig, planetsConfig } from "../constants/constants";
 import { Modal, modalDataProps } from "../utils/Modal";
 import { Events } from "../utils/Events";
-import GUI from "lil-gui";
 import { GLTFLoader } from "three-stdlib";
 import { LoadHelper } from "../utils/Loader";
 import { SaturnRing } from "../scenes/models/SaturnRing";
@@ -24,6 +23,7 @@ interface SpaceConfigProps {
   pBtnWrapNode: HTMLElement;
   introNode: HTMLElement;
   loadingNode: HTMLElement;
+  headerNode: HTMLElement;
 }
 
 export class Space {
@@ -38,6 +38,7 @@ export class Space {
   introNode: HTMLElement;
   loadingNode: HTMLElement;
   pBtnWrapNode: HTMLElement;
+  headerNode: HTMLElement;
 
   modal: Modal;
   modalData: Record<string, any>;
@@ -79,6 +80,7 @@ export class Space {
     this.introNode = config.introNode;
     this.loadingNode = config.loadingNode;
     this.pBtnWrapNode = config.pBtnWrapNode;
+    this.headerNode = config.headerNode;
 
     this.modalData = config.modalData;
     this.modal = new Modal(this, this.modalNode, this.modalData);
@@ -145,32 +147,6 @@ export class Space {
     // const lightHelper = new THREE.PointLightHelper(
     //     this.sunLight
     // )
-
-    // const gui = new GUI();
-
-    // const cameraRotaionFolder = gui.addFolder("cameraRotaion");
-    // cameraRotaionFolder.add(this.camera.rotation, "x").max(3).min(-3).step(0.1);
-    // cameraRotaionFolder.add(this.camera.rotation, "y").max(3).min(-3).step(0.1);
-    // cameraRotaionFolder.add(this.camera.rotation, "z").max(3).min(-3).step(0.1);
-
-    // const cameraPositionFolder = gui.addFolder("cameraPosition");
-    // cameraPositionFolder
-    //   .add(this.camera.position, "x")
-    //   .max(5)
-    //   .min(-5)
-    //   .step(0.1);
-    // cameraPositionFolder
-    //   .add(this.camera.position, "y")
-    //   .max(5)
-    //   .min(-5)
-    //   .step(0.1);
-    // cameraPositionFolder
-    //   .add(this.camera.position, "z")
-    //   .max(5)
-    //   .min(-5)
-    //   .step(0.1);
-
-    // gui.hide();
 
     this.scene.add(
       this.sun,
