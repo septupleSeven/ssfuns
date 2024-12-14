@@ -14,12 +14,14 @@ import { Events } from "../utils/Events";
 import GUI from "lil-gui";
 import { GLTFLoader } from "three-stdlib";
 import { LoadHelper } from "../utils/Loader";
+import { SaturnRing } from "../scenes/models/SaturnRing";
 
 interface SpaceConfigProps {
   canvas: HTMLCanvasElement;
   nameWrapNode: HTMLElement;
   modalNode: HTMLElement;
   modalData: Record<string, modalDataProps>;
+  pBtnWrapNode: HTMLElement;
   introNode: HTMLElement;
   loadingNode: HTMLElement;
 }
@@ -35,6 +37,7 @@ export class Space {
   modalNode: HTMLElement;
   introNode: HTMLElement;
   loadingNode: HTMLElement;
+  pBtnWrapNode: HTMLElement;
 
   modal: Modal;
   modalData: Record<string, any>;
@@ -52,6 +55,7 @@ export class Space {
   sun: Sun;
   sunGlow: SunGlow;
   sunLight: SunLight;
+  satrunRing: SaturnRing;
 
   planets: Planet[];
   orbits: Orbit[];
@@ -67,13 +71,14 @@ export class Space {
     config: SpaceConfigProps
   ) {
     this.isStart = false;
-    this.isModal = false;
+    this.isModal = true;
 
     this.canvas = config.canvas;
     this.nameWrapNode = config.nameWrapNode;
     this.modalNode = config.modalNode;
     this.introNode = config.introNode;
     this.loadingNode = config.loadingNode;
+    this.pBtnWrapNode = config.pBtnWrapNode;
 
     this.modalData = config.modalData;
     this.modal = new Modal(this, this.modalNode, this.modalData);
@@ -133,6 +138,8 @@ export class Space {
       this.orbits.push(orbitIns);
     }
 
+    this.satrunRing = new SaturnRing(this);
+
     this.events = new Events(this);
 
     // const lightHelper = new THREE.PointLightHelper(
@@ -170,7 +177,8 @@ export class Space {
       this.sunGlow,
       this.sunLight,
       ...this.orbits,
-      ...this.planets
+      ...this.planets,
+      this.satrunRing,
       // lightHelper,
     );
 
@@ -204,16 +212,26 @@ export class Space {
 
     });
 
+    window.addEventListener("wheel", () => {
+      this.events.hidePlanets();
+      this.events.handleTagSize();
+    })
+
     this.introNode.addEventListener("click", () => {
       this.events.startIntro();
-    })
+    });
 
-    window.addEventListener("wheel", () => {
-      console.log(this.camera.position.y)
-      this.events.hidePlanets();
-    })
+    this.pBtnWrapNode.querySelectorAll("button").forEach(
+      el => {
+        const events = this.events;
 
-    // console.log(this.renderer.info);
+        el.addEventListener("click", function(){
+          const thisPoint = this.dataset.point!;
+          events.handleCameraPoint(thisPoint);
+        })
+      }
+    )
+
   }
 
   resize() {
@@ -233,6 +251,8 @@ export class Space {
     this.planets.forEach((planet) => {
       planet.update();
     });
+
+    this.satrunRing.update();
 
     this.composer.update();
   }

@@ -12,6 +12,7 @@ export default async function (){
                 modalNode: document.querySelector("#modal")!,
                 introNode: document.querySelector("#intro")!,
                 loadingNode: document.querySelector("#loader")!,
+                pBtnWrapNode: document.querySelector("#p_btn_wrap")!,
                 modalData
             }
         );

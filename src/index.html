@@ -9,12 +9,14 @@
 </head>
 
 <body>
+
   <div id="loader">
     <div class="loader_wrap">
       <div class="loader_contents"></div>
       <p>Loading...</p>
     </div>
   </div>
+
   <div id="intro">
     <div class="title_container">
       <h1 class="title">SS<span>F</span>S</h1>
@@ -27,15 +29,38 @@
       </span>
     </button>
   </div>
+
   <div id="name_wrap"></div>
+
   <div id="app">
     <canvas id="canvas"></canvas>
   </div>
+
   <div id="modal">
     <button class="modal_close">
       <span class="material-icons">close</span>
     </button>
   </div>
+
+  <div id="p_btn_wrap">
+    <button disabled data-point="refresh">
+      <span class="material-icons">sync</span>
+      <p class="tooltip">시점 초기화</p>
+    </button>
+    <button disabled data-point="vertical">
+      <figure>
+        <img src="/assets/images/p-vertical.svg" alt="">
+      </figure>
+      <p class="tooltip">수직으로 보기</p>
+    </button>
+    <button disabled data-point="horizontal">
+      <figure>
+        <img src="/assets/images/p-horizontal.svg" alt="">
+      </figure>
+      <p class="tooltip">수평으로 보기</p>
+    </button>
+  </div>
+
   <script type="module" src="./main.ts"></script>
 </body>
 

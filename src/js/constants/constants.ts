@@ -9,7 +9,9 @@ interface planetsConfigProps {
     orbitColor?: THREE.ColorRepresentation;
     orbitDistanceX?: number;
     orbitDistanceZ?: number;
-    orbitAngle?: number;
+    orbitSpeed?: number;
+    rotationAngle?: number;
+    rotationSpeed?: number;
 }
 
 interface oribitsConfigProps {
@@ -30,15 +32,24 @@ export const planetsConfig:planetsConfigProps[] = [
         nameTag: "수성",
         orbitColor: 0xffffff,
     },
+    // {
+    //     texture: "venus_texture.jpg",
+    //     orbitRadius: 2.5,
+    //     planetRadius: 0.2,
+    //     name: "VENUS",
+    //     nameTag: "금성",
+    //     orbitColor: 0xffffff,
+    //     orbitSpeed: 0.0015
+    // },
     {
-        texture: "venus_texture.jpg",
+        texture: "saturn_texture.jpg",
         orbitRadius: 2.5,
         planetRadius: 0.2,
-        name: "VENUS",
-        nameTag: "금성",
+        name: "SATURN",
+        nameTag: "토성",
         orbitColor: 0xffffff,
-        orbitAngle: 0.0015
-    }
+        orbitSpeed: 0.0015
+    },
 ]
 
 function createOrbitsConfig(

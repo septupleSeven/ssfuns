@@ -10,8 +10,9 @@ interface PlanetConfigProps{
     orbitColor?: THREE.ColorRepresentation;
     orbitDistanceX?: number;
     orbitDistanceZ?: number;
-    orbitAngle?: number;
-    rotation?: number;
+    orbitSpeed?: number;
+    rotationAngle?: number;
+    rotationSpeed?: number;
     layer?:number;
 }
 
@@ -31,6 +32,9 @@ export class Planet extends THREE.Mesh {
         const geometry = new THREE.SphereGeometry(config.planetRadius, 40, 40);
         
         super(geometry, material);
+
+        // const axesHelper = new THREE.AxesHelper(2);
+        // this.add(axesHelper)
         
         this.orbitAngle = 0;
 
@@ -41,8 +45,9 @@ export class Planet extends THREE.Mesh {
             orbitColor: config.orbitColor ?? 0xffffff,
             orbitDistanceX: config.orbitDistanceX ?? 0,
             orbitDistanceZ: config.orbitDistanceZ ?? 0,
-            orbitAngle: config.orbitAngle ?? 0.001,
-            rotation: config.rotation ?? 0.001,
+            orbitSpeed: config.orbitSpeed ?? 0.01,
+            rotationAngle: config.rotationAngle ?? 0,
+            rotationSpeed: config.rotationSpeed ?? 0.001,
             layer: config.layer ?? 7
         };
         
@@ -57,6 +62,9 @@ export class Planet extends THREE.Mesh {
         this.isOrbitRevolution = true;
         this.isActive = false;
 
+        this.rotation.order = 'ZYX';
+        this.rotation.z = this.config.rotationAngle!;
+
         this.nameTag.addEventListener("pointerenter", e => {
             const nameTag = e.target as HTMLElement;
             this.space.events.handlePointerMove(e, true, nameTag.dataset.planet);
@@ -69,13 +77,13 @@ export class Planet extends THREE.Mesh {
 
     update(){
         if(this.isOrbitRevolution){
-            this.orbitAngle -= this.config.orbitAngle!;
+            this.orbitAngle -= this.config.orbitSpeed!;
         }
 
         this.position.x = Math.cos(this.orbitAngle) * this.config.orbitRadius + this.config.orbitDistanceX!;
         this.position.z = Math.sin(this.orbitAngle) * this.config.orbitRadius + this.config.orbitDistanceZ!;
 
-        this.rotation.y += this.config.rotation!;
+        this.rotation.y += this.config.rotationSpeed!;
 
         const NDCPos = this.getNDC();
         this.setNameTagPos(NDCPos);

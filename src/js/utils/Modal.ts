@@ -33,6 +33,7 @@ export class Modal {
 
     this.closeBtn.addEventListener("click", () => {
       this.hideModalContents();
+      this.space.events.isCameraPointActive = false;
       this.space.events.resetCamera();
     });
   }
@@ -128,7 +129,7 @@ export class Modal {
       duration: 0.4,
       ease: "power1.in",
       onComplete: () => {
-        this.space.isModal = true;
+        this.space.isModal = false;
         this.clearModalContents();
         this.space.nameWrapNode.querySelectorAll("span").forEach(
           el => {el.style.opacity = "1"}
