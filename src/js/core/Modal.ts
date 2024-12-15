@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import { Space } from "../core/Space";
+import { Space } from "./Space";
 
 export interface modalDataProps {
   imgSrc: {

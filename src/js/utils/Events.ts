@@ -84,7 +84,7 @@ export class Events {
     const tl = gsap.timeline();
 
     this.camera.controls.autoRotate = false;
-    this.camera.controls.enabled = false;
+    this.camera.handleLockControls(false);
 
     const controlsAngle = {
       polar: this.camera.controls.getPolarAngle(),
@@ -123,9 +123,8 @@ export class Events {
         ease: "power1.inOut",
         duration: 1.8,
         onUpdate: () => {
-          this.camera.controls.setPolarAngle(controlsAngle.polar);
-          this.camera.controls.setAzimuthalAngle(controlsAngle.azimuthal);
-          this.camera.controls.update();
+          this.camera.updateControlsAngle(controlsAngle);
+          this.camera.updateTControls();
         },
       })
       .to(this.camera.position, {
@@ -140,18 +139,15 @@ export class Events {
           duration: 2.8,
           onUpdate: () => {
             this.camera.controls.update();
+            this.camera.updateTControls();
           },
         },
         "<"
       )
-      .to(
-        this.headerNode,
-        {
-          y: 0,
-          duration: 1.2,
-        },
-        "<"
-      )
+      .to(this.headerNode, {
+        y: 0,
+        duration: 1.2,
+      })
       .to(
         this.pBtnWrapNode,
         {
@@ -170,8 +166,10 @@ export class Events {
             this.loadingNode.remove();
             this.space.isStart = true;
             this.space.isModal = false;
-            this.camera.controls.enabled = true;
+
             this.camera.resize();
+
+            this.camera.handleLockControls(true);
             this.isCameraPointActive = false;
             this.lockCameraPointBtn();
           },
@@ -214,6 +212,13 @@ export class Events {
       this.composer.outLinePass.selectedObjects = [target];
       document.body.style.cursor = "pointer";
       target.isOrbitRevolution = false;
+
+      this.nameWrapNode.querySelectorAll("span").forEach(
+        el => {
+          if(target.name !== el.dataset.planet) el.style.opacity = "0.4";
+        }
+      );
+
       if (target.name === "SATURN") this.satrunRing.isOrbitRevolution = false;
     } else {
       this.composer.outLinePass.selectedObjects = [];
@@ -222,6 +227,12 @@ export class Events {
       });
 
       if (!this.satrunRing.isActive) this.satrunRing.isOrbitRevolution = true;
+
+      this.nameWrapNode.querySelectorAll("span").forEach(
+        el => {
+          el.style.opacity = "1";
+        }
+      );
 
       document.body.style.cursor = "auto";
     }
@@ -256,11 +267,12 @@ export class Events {
       this.lockCameraPointBtn();
 
       target.isActive = true;
-      if(!target.visible) target.visible = true;
+      if (!target.visible) target.visible = true;
       if (target.name === "SATURN") {
         this.space.satrunRing.isActive = true;
-        if(!this.space.satrunRing.visible) this.space.satrunRing.visible = true;
-      };
+        if (!this.space.satrunRing.visible)
+          this.space.satrunRing.visible = true;
+      }
 
       const azimuthalAngle = {
         azimuthal: this.camera.controls.getAzimuthalAngle(),
@@ -275,14 +287,16 @@ export class Events {
         calcedAzimuthalAngle += Math.PI;
       }
 
-      this.camera.controls.enabled = false;
+      this.camera.handleLockControls(false);
+
+      const additinalZPos = target.name === "SUN" ? 0.5 : 0.25;
 
       const tl = gsap.timeline();
 
       tl.to(this.camera.position, {
         x: target.position.x,
         y: target.position.y,
-        z: target.position.z + 0.5,
+        z: target.position.z + target.config.planetRadius + additinalZPos,
         duration: 1.2,
       })
         .to(
@@ -328,9 +342,8 @@ export class Events {
       polar: -Math.PI / 2,
       duration: 1.2,
       onUpdate: () => {
-        this.camera.controls.setAzimuthalAngle(controlsAngle.azimuthal);
-        this.camera.controls.setPolarAngle(controlsAngle.polar);
-        this.camera.controls.update();
+        this.camera.updateControlsAngle(controlsAngle);
+        this.camera.updateTControls();
       },
     })
       .to(this.camera.position, {
@@ -348,23 +361,24 @@ export class Events {
           duration: 1.2,
           onUpdate: () => {
             this.camera.controls.update();
+            this.camera.updateTControls();
           },
           onComplete: () => {
-            this.camera.controls.enabled = true;
-
             this.planets.forEach((planet) => {
               planet.isActive = false;
               planet.isOrbitRevolution = true;
-              
-              if(!planet.visible) planet.visible = true;
+
+              if (!planet.visible) planet.visible = true;
 
               if (planet.name === "SATURN") {
                 this.satrunRing.isActive = false;
                 this.satrunRing.isOrbitRevolution = true;
-              
-                if(!this.satrunRing.visible) this.satrunRing.visible = true;
+
+                if (!this.satrunRing.visible) this.satrunRing.visible = true;
               }
             });
+
+            this.camera.handleLockControls(true);
 
             this.isCameraPointActive = false;
             this.lockCameraPointBtn();
@@ -378,9 +392,9 @@ export class Events {
     if (!this.isStart || this.isModal) return;
 
     const currentPosVal =
-    this.camera.controls.getPolarAngle() > 1.2
-      ? this.camera.position.z
-      : this.camera.position.y;
+      this.camera.controls.getPolarAngle() > 1.2
+        ? this.camera.position.z
+        : this.camera.position.y;
 
     const condition = currentPosVal >= 12;
 
@@ -410,7 +424,7 @@ export class Events {
 
     const calcedSize = Math.min(
       bodyFontSize * 1.5,
-      bodyFontSize * (Math.round(currentPosVal) / 1.8)
+      bodyFontSize * (Math.round(currentPosVal) / 2.2)
     );
 
     if (this.nameTagSize !== calcedSize) {
@@ -443,12 +457,11 @@ export class Events {
       polar: -Math.PI / 2,
       duration: 1.2,
       onUpdate: () => {
-        this.camera.controls.setAzimuthalAngle(controlsAngle.azimuthal);
-        this.camera.controls.setPolarAngle(controlsAngle.polar);
-        this.camera.controls.update();
+        this.camera.updateControlsAngle(controlsAngle);
+        this.camera.updateTControls();
       },
       onComplete: () => {
-        this.camera.controls.enabled = true;
+        this.camera.handleLockControls(true);
         this.isCameraPointActive = false;
         this.lockCameraPointBtn();
       },
@@ -471,9 +484,8 @@ export class Events {
       polar: -Math.PI / 2,
       duration: 1.2,
       onUpdate: () => {
-        this.camera.controls.setAzimuthalAngle(controlsAngle.azimuthal);
-        this.camera.controls.setPolarAngle(controlsAngle.polar);
-        this.camera.controls.update();
+        this.camera.updateControlsAngle(controlsAngle);
+        this.camera.updateTControls();
       },
     })
       .to(this.camera.position, {
@@ -491,9 +503,10 @@ export class Events {
           duration: 1.2,
           onUpdate: () => {
             this.camera.controls.update();
+            this.camera.updateTControls();
           },
           onComplete: () => {
-            this.camera.controls.enabled = true;
+            this.camera.handleLockControls(true);
             this.isCameraPointActive = false;
             this.lockCameraPointBtn();
           },
@@ -523,7 +536,7 @@ export class Events {
     this.isCameraPointActive = true;
 
     if (this.camera.controls.enabled) {
-      this.camera.controls.enabled = false;
+      this.camera.handleLockControls(false);
     }
   }
 

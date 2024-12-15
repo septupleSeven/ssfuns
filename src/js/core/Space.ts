@@ -9,7 +9,7 @@ import { Planet } from "../scenes/models/Planet";
 import { SunLight } from "../scenes/tools/Sunlight";
 import { Composer } from "../utils/Composer";
 import { orbitsConfig, planetsConfig } from "../constants/constants";
-import { Modal, modalDataProps } from "../utils/Modal";
+import { Modal, modalDataProps } from "./Modal";
 import { Events } from "../utils/Events";
 import { GLTFLoader } from "three-stdlib";
 import { LoadHelper } from "../utils/Loader";
@@ -109,6 +109,7 @@ export class Space {
 
     this.sun = new Sun(this, {
       rotation: 0.001,
+      planetRadius: 0.325
     });
     this.sunGlow = new SunGlow(this);
     this.sunLight = new SunLight({

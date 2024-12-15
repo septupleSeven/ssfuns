@@ -85,8 +85,18 @@ export class Planet extends THREE.Mesh {
 
         this.rotation.y += this.config.rotationSpeed!;
 
-        const NDCPos = this.getNDC();
-        this.setNameTagPos(NDCPos);
+        if(this.isPlanetVisible()){
+
+            if(this.nameTag.style.display !== "block"){
+                this.nameTag.style.display = "block";
+            }
+
+            const NDCPos = this.getNDC();
+            this.setNameTagPos(NDCPos);
+        }else{
+            this.nameTag.style.display = "none";
+        }
+
     }
 
     getNDC(){
@@ -121,5 +131,22 @@ export class Planet extends THREE.Mesh {
         }
     ){
         this.nameTag.style.transform = `translate(${NDCPos.x}px, ${-NDCPos.y + this.space.canvas.clientHeight}px)`;
+    }
+
+    isPlanetVisible(){
+        const frustum = new THREE.Frustum();
+        const matrix = new THREE.Matrix4();
+
+        this.space.camera.updateMatrixWorld();
+        this.space.camera.updateProjectionMatrix();
+
+        matrix.multiplyMatrices(
+            this.space.camera.projectionMatrix,
+            this.space.camera.matrixWorldInverse,
+        );
+
+        frustum.setFromProjectionMatrix(matrix);
+
+        return frustum.intersectsObject(this);
     }
 }
