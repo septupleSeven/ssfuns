@@ -129,15 +129,15 @@ export class Events {
         },
       })
       .to(this.camera.position, {
-        y: 5,
-        duration: 2.4,
+        y: 7,
+        duration: 2.8,
         delay: -1.8,
       })
       .to(
         this.camera.controls.target,
         {
           y: 0,
-          duration: 2.4,
+          duration: 2.8,
           onUpdate: () => {
             this.camera.controls.update();
           },
@@ -256,8 +256,11 @@ export class Events {
       this.lockCameraPointBtn();
 
       target.isActive = true;
-
-      if (target.name === "SATURN") this.space.satrunRing.isActive = true;
+      if(!target.visible) target.visible = true;
+      if (target.name === "SATURN") {
+        this.space.satrunRing.isActive = true;
+        if(!this.space.satrunRing.visible) this.space.satrunRing.visible = true;
+      };
 
       const azimuthalAngle = {
         azimuthal: this.camera.controls.getAzimuthalAngle(),
@@ -332,7 +335,7 @@ export class Events {
     })
       .to(this.camera.position, {
         x: 0,
-        y: 5,
+        y: 7,
         z: 0,
         duration: 1.2,
       })
@@ -352,10 +355,14 @@ export class Events {
             this.planets.forEach((planet) => {
               planet.isActive = false;
               planet.isOrbitRevolution = true;
+              
+              if(!planet.visible) planet.visible = true;
 
               if (planet.name === "SATURN") {
                 this.satrunRing.isActive = false;
                 this.satrunRing.isOrbitRevolution = true;
+              
+                if(!this.satrunRing.visible) this.satrunRing.visible = true;
               }
             });
 
@@ -368,12 +375,21 @@ export class Events {
   }
 
   hidePlanets() {
-    const condition = this.camera.position.y >= 8;
+    if (!this.isStart || this.isModal) return;
+
+    const currentPosVal =
+    this.camera.controls.getPolarAngle() > 1.2
+      ? this.camera.position.z
+      : this.camera.position.y;
+
+    const condition = currentPosVal >= 12;
 
     if (condition !== this.isPlanetHide) {
       this.planets.forEach((planet) => {
         planet.visible = !condition;
       });
+
+      this.satrunRing.visible = !condition;
 
       this.isPlanetHide = condition;
     }

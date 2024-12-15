@@ -22,7 +22,7 @@ export class SunGlow extends THREE.Mesh {
             transparent: true,
         }) as THREE.ShaderMaterial;
 
-        const geometry = new THREE.SphereGeometry(1.4, 40, 40);
+        const geometry = new THREE.SphereGeometry(0.525, 40, 40);
 
         super(geometry, material);
         this.space = space;

@@ -25,7 +25,7 @@ export class Sun extends THREE.Mesh {
             side: THREE.DoubleSide
         });
 
-        const geometry = new THREE.SphereGeometry(1, 40, 40);
+        const geometry = new THREE.SphereGeometry(0.325, 40, 40);
 
         super(geometry, material);
 

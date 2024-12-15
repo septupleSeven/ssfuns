@@ -33,7 +33,7 @@ export class Planet extends THREE.Mesh {
         
         super(geometry, material);
 
-        // const axesHelper = new THREE.AxesHelper(2);
+        // const axesHelper = new THREE.AxesHelper(1);
         // this.add(axesHelper)
         
         this.orbitAngle = 0;

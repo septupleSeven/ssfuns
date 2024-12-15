@@ -1,8 +1,71 @@
 {
+    "SUN": {
+        "imgSrc": {
+            "pc": "assets/images/planets/sun_img01.png",
+            "mo": "assets/images/planets/sun_img01.png"
+        },
+        "titleContainer": {
+            "title": "태양",
+            "subtitles": [
+                "Sun",
+                "太陽",
+                "&#9737;"
+            ]
+        },
+        "contents": [
+            {
+                "contentsTitle": "정보",
+                "constentsList": [
+                    {
+                        "title": "반지름",
+                        "desc": "약 696,340 km (지구의 약 10,945.0%)"
+                    }
+                ]
+            },
+            {
+                "contentsTitle": "이야깃거리",
+                "constentsList": [
+                    {
+                        "title": "태양과 표면",
+                        "desc": "태양의 온도는 중심부의 약 1,500만 °C에서 표면의 약 5,600°C까지 극적으로 변합니다. 표면이 '더 시원하다'고 해도 여전히 너무 뜨거워서 고체나 액체가 형성될 수 없습니다. 따라서 태양에는 실제로 고체 표면이 전혀 없습니다. 그래서 어떻게든 더위를 견딜 수 있다고 해도 태양 위에는 설 수 없습니다."
+                    },
+                    {
+                        "title": "태양과 색깔",
+                        "desc": "태양은 실제로 흰색입니다. 즉, 가시 스펙트럼의 모든 색상을 방출합니다. 하지만 지구상의 우리에게는 지평선 근처에 있을 때 주황색-노란색 또는 심지어 빨간색으로 보입니다. 이는 지구 대기가 빨간색, 주황색 또는 노란색 빛의 파장보다 짧은 파장의 파란색 빛을 더 효율적으로 산란시키기 때문입니다."
+                    },
+                    {
+                        "title": "태양과 수명",
+                        "desc": "태양의 나이는 약 46억년이며 현재 수명의 한가운데에 있습니다. 이 별은 은하수 나선팔에서 일반적으로 발견되는 젊고 금속이 풍부한 별인 인구 I로 알려진 별 세대에 속합니다."
+                    },
+                    {
+                        "title": "태양과 폭발",
+                        "desc": "태양은 절대 폭발하지 않습니다. 약 50억년 후에 태양은 황색왜성에서 적색거성으로 변할 것입니다. 수소가 부족해지면 코어가 수축하고 가열되어 헬륨을 연료로 사용하기 시작합니다. 이로 인해 태양이 크게 팽창하여 수성, 금성, 그리고 아마도 지구를 삼킬 것입니다."
+                    }
+                ]
+            },
+            {
+                "contentsTitle": "미디어",
+                "constentsList": [
+                    {
+                        "title": "서적",
+                        "desc": "'Our Solar System: The Sun' - Seymour Simon"
+                    },
+                    {
+                        "title": "영상",
+                        "desc": "'Sunshine' - Danny Boyle"
+                    },
+                    {
+                        "title": "다큐멘터리",
+                        "desc": "'Secrets of the Sun' - National Geographic"
+                    }
+                ]
+            }
+        ]
+    },
     "MERCURY": {
         "imgSrc": {
-            "pc": "assets/images/test.jpg",
-            "mo": "assets/images/test.jpg"
+            "pc": "assets/images/planets/mecury_img01.png",
+            "mo": "assets/images/planets/mecury_img01.png"
         },
         "titleContainer": {
             "title": "수성",
@@ -30,8 +93,20 @@
                 "contentsTitle": "이야깃거리",
                 "constentsList": [
                     {
-                        "title": "수성의 기온 변동",
+                        "title": "수성과 기온 변동",
                         "desc": "수성은 태양에 가장 가까운 행성으로, 낮에는 표면 온도가 약 430도까지 올라가지만, 밤에는 영하 180도까지 떨어집니다. 이렇게 극단적인 온도 변동은 대기가 거의 없기 때문에 발생합니다."
+                    },
+                    {
+                        "title": "수성과 고대 천문학",
+                        "desc": "고대 천문학자들은 수성은 두 개의 다른 천체라고 믿었습니다. 이는 수성이 저녁 서쪽 하늘에 나타나거나 아침 동쪽 하늘에 떠오를 수 있기 때문입니다."
+                    },
+                    {
+                        "title": "수성과 이주 가능성",
+                        "desc": "수성은 거의 확실히 사람이 살 수 없습니다. 거친 기후와 태양과 가까운 거리는 지구에서 살아가는 유기체에는 너무 극단적인 환경이기 때문입니다."
+                    },
+                    {
+                        "title": "수성과 꼬리",
+                        "desc": "많은 사람들이 혜성이 꼬리가 있다는 것을 알고 있습니다. 하지만 꼬리가 있는 행성에 대해 들어보셨나요? 수성은 행성 표면에서 나트륨 원자를 밀어내는 태양풍에 의해 혜성 같은 꼬리를 가지고 있습니다. 보기가 쉽지 않습니다. 망원경과 특수 필터를 사용하여 장시간 노출 사진을 찍어야 합니다."
                     }
                 ]
             },
@@ -47,7 +122,7 @@
                         "desc": "'Messenger: Journey to Mercury' - NASA"
                     },
                     {
-                        "title": "영상",
+                        "title": "다큐멘터리",
                         "desc": "'Mercury: The Story So Far' - BBC"
                     }
                 ]
@@ -56,8 +131,8 @@
     },
     "VENUS": {
         "imgSrc": {
-            "pc": "assets/images/test.jpg",
-            "mo": "assets/images/test.jpg"
+            "pc": "assets/images/planets/venus_img01.png",
+            "mo": "assets/images/planets/venus_img01.png"
         },
         "titleContainer": {
             "title": "금성",
@@ -73,11 +148,11 @@
                 "constentsList": [
                     {
                         "title": "반지름",
-                        "desc": "약 2,440 km (지구의 약 38%)"
+                        "desc": "약 6,052 km (지구의 약 95%)"
                     },
                     {
                         "title": "공전 주기",
-                        "desc": "약 88일"
+                        "desc": "약 225일"
                     }
                 ]
             },
@@ -85,8 +160,20 @@
                 "contentsTitle": "이야깃거리",
                 "constentsList": [
                     {
-                        "title": "수성의 기온 변동",
-                        "desc": "수성은 태양에 가장 가까운 행성으로, 낮에는 표면 온도가 약 430도까지 올라가지만, 밤에는 영하 180도까지 떨어집니다. 이렇게 극단적인 온도 변동은 대기가 거의 없기 때문에 발생합니다."
+                        "title": "금성과 고대 천문학",
+                        "desc": "니콜라우스 코페르니쿠스 (Nicolaus Copernicus) 와 갈릴레오 갈릴레이 (Galileo Galilei) 는 금성을 행성으로 분류 한 것으로 알려져 있습니다. 후자는 1610 년에 금성에 대한 최초의 정확한 관측을 수행했습니다. 갈릴레오는 망원경을 통해 행성을보고 달과 유사한 위상을 발견했습니다. 이 발견은 행성이 그 반대가 아니라 태양을 공전한다는 코페르니쿠스 이론을 입증했습니다."
+                    },
+                    {
+                        "title": "금성과 색깔",
+                        "desc": "금성은 망원경으로 보았을 때 흰색 또는 황백색으로 보입니다. 그 이유는 두꺼운 이산화탄소 대기와 황산 구름으로 덮여 있기 때문입니다. 이 행성의 구름 덮개는 직접적인 관측을 가리기 때문에 금성 표면의 색깔은 정확하게 알려져 있지 않습니다. 하지만, 우주선 미션에 의해 수집된 데이터에 기초하여, 과학자들은 그것이 다양한 빨간색, 갈색, 그리고 회색 색상을 나타낼 가능성이 높다고 믿고 있습니다."
+                    },
+                    {
+                        "title": "금성과 온도",
+                        "desc": "금성의 평균 표면 온도는 약 462 °C로 태양계에서 가장 뜨거운 곳 중 하나입니다. 이 놀라운 열은 주로 이산화탄소로 구성된 금성의 두꺼운 대기의 결과입니다. 그것은 태양 복사를 가두고 온도를 극단적인 수준으로 올리는 온실 효과를 만듭니다."
+                    },
+                    {
+                        "title": "금성과 자전",
+                        "desc": "금성은 태양계의 대부분 행성과 반대 방향으로 회전하는데, 이를 역행 회전이라고 합니다(역행 운동과 혼동하지 마세요). 그 결과, 금성의 태양은 서쪽에서 떠서 동쪽으로 지고, 지구 하늘에서 태양이 동쪽에서 서쪽으로 움직이는 것과 대조됩니다. 금성의 역행 회전 원인은 아직 잘 이해되지 않았습니다."
                     }
                 ]
             },
@@ -95,15 +182,216 @@
                 "constentsList": [
                     {
                         "title": "서적",
-                        "desc": "'The Mercury 13: The True Story of Thirteen Women and the Dream of Space Flight' - Martha Ackmann"
+                        "desc": "'Venus Revealed: A New Look Below the Clouds of Our Mysterious Twin Planet' - Imke de Pater and Jack J. Lissauer"
                     },
                     {
                         "title": "영상",
-                        "desc": "'Messenger: Journey to Mercury' - NASA"
+                        "desc": "'Venus: The Hell Planet' - NASA"
+                    },
+                    {
+                        "title": "다큐멘터리",
+                        "desc": "'The Mystery of Venus' - BBC"
+                    }
+                ]
+            }
+        ]
+    },
+    "EARTH": {
+        "imgSrc": {
+            "pc": "assets/images/planets/earth_img01.png",
+            "mo": "assets/images/planets/earth_img01.png"
+        },
+        "titleContainer": {
+            "title": "지구",
+            "subtitles": [
+                "Earth",
+                "地球",
+                "&#128808;"
+            ]
+        },
+        "contents": [
+            {
+                "contentsTitle": "정보",
+                "constentsList": [
+                    {
+                        "title": "반지름",
+                        "desc": "약 6,371 km"
+                    },
+                    {
+                        "title": "공전 주기",
+                        "desc": "약 365일"
+                    }
+                ]
+            },
+            {
+                "contentsTitle": "이야깃거리",
+                "constentsList": [
+                    {
+                        "title": "지구와 생명체",
+                        "desc": "지구는 태양계에서 생명체가 존재하는 유일한 행성으로 알려져 있습니다. 생명체가 존재할 수 있는 조건인 물, 적절한 온도, 그리고 대기를 제공하는 '골디락스 존(Goldilocks Zone)'에 위치하고 있습니다. 과학자들은 원시 지구의 화학적 환경에서 최초의 생명체가 탄생했다고 믿습니다."
+                    },
+                    {
+                        "title": "지구는 둥글다",
+                        "desc": "지구가 둥글다는 것은 월식, 수평선에 있는 배, 별자리, 시간대, 물체 그림자 측정, 비행 노선, 타 행성 관찰, 우주에서 찍은 지구 등으로 알 수 있습니다."
+                    },
+                    {
+                        "title": "지구와 제2의 달",
+                        "desc": "소행성 3753 크뤼트네(Cruithne)는 지름 2.07km의 근지구천체입니다. 1984년에 발견되었고, 1997년에 과학자들은 유별난 궤도를 공개하여 '지구의 두 번째 달'로 불리게 되었습니다. 크뤼트네의 궤도와 지구와의 근접성은 달과 같은 연관성을 시사할 수 있지만, 지구의 달로 분류되는 기준에는 부합하지 않습니다. 무엇보다도, 크뤼트네는 지구의 궤도를 돌지 않는다; 때로는 지구의 중력 영향에서 훨씬 벗어나 태양 반대편에 있습니다. 궤도의 어느 지점에서, 크뤼트네는 금성와 수성 근처와 화성의 궤도 밖으로 들어옵니다. 크뤼트네와 지구는 비슷한 거리에서 태양을 공전하기 때문에, 이들은 동궤도 천체로 간주됩니다."
+                    },
+                    {
+                        "title": "지구와 니비루",
+                        "desc": "니비루는 존재하지 않는 행성으로 일부 사람들은 곧 지구에 가까워지거나 지구와 충돌하여 재앙적인 사건을 일으킬 것이라고 믿고 있습니다. 이 이름은 종말 예언에서 자주 언급됩니다. 천문학자들은 행성이 지구에 접근한다는 생각에 회의적입니다. 그들의 회의론은 니비루와 같은 행성이 존재한다면 다른 행성의 궤도에 중대한 영향을 미치고 관측이 가능하다는 사실에서 비롯됩니다."
+                    }
+                ]
+            },
+            {
+                "contentsTitle": "미디어",
+                "constentsList": [
+                    {
+                        "title": "서적",
+                        "desc": "'A Short History of Nearly Everything' - Bill Bryson"
                     },
                     {
                         "title": "영상",
-                        "desc": "'Mercury: The Story So Far' - BBC"
+                        "desc": "'Earth' - Alastair Fothergill, Mark Linfield"
+                    },
+                    {
+                        "title": "다큐멘터리",
+                        "desc": "'Planet Earth' - BBC"
+                    }
+                ]
+            }
+        ]
+    },
+    "MARS": {
+        "imgSrc": {
+            "pc": "assets/images/planets/mars_img01.png",
+            "mo": "assets/images/planets/mars_img01.png"
+        },
+        "titleContainer": {
+            "title": "화성",
+            "subtitles": [
+                "Mars",
+                "火星",
+                "&#9794;"
+            ]
+        },
+        "contents": [
+            {
+                "contentsTitle": "정보",
+                "constentsList": [
+                    {
+                        "title": "반지름",
+                        "desc": "약 3,389 km (지구의 약 53.2%)"
+                    },
+                    {
+                        "title": "공전 주기",
+                        "desc": "약 687일"
+                    }
+                ]
+            },
+            {
+                "contentsTitle": "이야깃거리",
+                "constentsList": [
+                    {
+                        "title": "화성과 계절",
+                        "desc": "화성의 축 기울기는 지구의 축 기울기와 매우 유사합니다. 화성은 25.2° 기울어져 있는 반면 지구의 축 기울기는 약 23.5°입니다. 이러한 이유로 화성은 봄, 여름, 가을, 겨울의 뚜렷한 4계절이 있습니다."
+                    },
+                    {
+                        "title": "화성과 두개의 달",
+                        "desc": "화성에는 포보스와 데이모스의 두 개의 달이 있습니다. 둘 다 1877년 미국 천문학자 아사프 홀에 의해 발견되었습니다. 화성의 달은 태양계에서 가장 작은 달 중 하나입니다."
+                    },
+                    {
+                        "title": "화성과 표면",
+                        "desc": "화성의 표면은 주로 현무암으로 구성되어 있습니다. 화성 토양에 산화철이 널리 퍼져 있어 행성이 뚜렷한 붉은 색을 띱니다. 이 붉은 행성은 계곡, 사막, 산, 그리고 극지방의 만년설까지 우리 행성과 유사한 많은 표면적 특징을 가지고 있습니다. 화성이 과거에 물이 많은 행성이었다는 것을 암시하는 이전의 삼각주도 있습니다."
+                    },
+                    {
+                        "title": "화성과 대기",
+                        "desc": "화성의 대기는 지구보다 훨씬 얇습니다. 화성의 대기는 주로 이산화탄소(95%)로 구성되어 있는 반면, 우리 행성의 대기는 질소와 산소가 풍부합니다. 따라서 인간은 화성에서 숨을 쉴 수 없을 것입니다."
+                    }
+                ]
+            },
+            {
+                "contentsTitle": "미디어",
+                "constentsList": [
+                    {
+                        "title": "서적",
+                        "desc": "'The Case for Mars: The Plan to Settle the Red Planet and Why We Must' - Robert Zubrin"
+                    },
+                    {
+                        "title": "영상",
+                        "desc": "'The Martian' - Ridley Scott"
+                    },
+                    {
+                        "title": "다큐멘터리",
+                        "desc": "'Mars: Inside the High-Risk Mission to the Red Planet' - National Geographic"
+                    }
+                ]
+            }
+        ]
+    },
+    "JUPITER": {
+        "imgSrc": {
+            "pc": "assets/images/planets/jupiter_img01.png",
+            "mo": "assets/images/planets/jupiter_img01.png"
+        },
+        "titleContainer": {
+            "title": "목성",
+            "subtitles": [
+                "Jupiter",
+                "木星",
+                "&#9795;"
+            ]
+        },
+        "contents": [
+            {
+                "contentsTitle": "정보",
+                "constentsList": [
+                    {
+                        "title": "반지름",
+                        "desc": "약 69,911 km (지구의 약 1,097.8%)"
+                    },
+                    {
+                        "title": "공전 주기",
+                        "desc": "약 4,333일 (약 11.86년)"
+                    }
+                ]
+            },
+            {
+                "contentsTitle": "이야깃거리",
+                "constentsList": [
+                    {
+                        "title": "목성과 구성 요소",
+                        "desc": "목성의 표면은 고체가 아닙니다. 목성의 대기는 아래로 갈수록 점점 밀도가 높아지며, 작은 핵을 둘러싸고 있는 액체층으로 변합니다. 간단히 말해, 대기가 목성의 거의 전체를 구성하고 있는 것입니다. 목성(그리고 목성의 대기)은수소 90%와 헬륨 10%로 이루어져 있습니다. 태양의 구성과 매우 흡사합니다."
+                    },
+                    {
+                        "title": "목성과 대적점",
+                        "desc": "대적점은 목성의 남반구에 위치한 지구 2배 크기의 거대 폭풍입니다. 대적점은 지구상의 어떠한 폭풍보다 더 빠른 속도로 시계 반대 방향으로 회전하는 진홍색 구름으로 이루어져 있습니다. 목성의 대적점은 시간이 지남에 따라 줄어들고 있습니다."
+                    },
+                    {
+                        "title": "목성과 이주 가능성",
+                        "desc": "목성에 사람이 착륙하는 건 좋지 않은 생각입니다. 목성에는 단단한 땅이 없기에 ‘착륙’이라는 단어도 적절하지 않습니다. 핵에 근접할 때까지 계속해서 떨어지게 되며, 떨어지는 동안 지구보다 몇천 배나 더 강한 압력을 받게 될 것입니다."
+                    },
+                    {
+                        "title": "목성과 실패한 별",
+                        "desc": "목성은 별이 되기엔 충분한 조건을 갖추지 못한 행성으로 볼 수 있습니다. 별이 되려면 핵에서 수소를 헬륨으로 융합할 만큼 높은 압력과 온도를 생성해야 합니다. 이를 위해서는 최소한 목성 질량의 80배에 달하는 질량이 필요합니다."
+                    }
+                ]
+            },
+            {
+                "contentsTitle": "미디어",
+                "constentsList": [
+                    {
+                        "title": "서적",
+                        "desc": "'Jupiter: The Giant Planet' - John H. Rogers"
+                    },
+                    {
+                        "title": "영상",
+                        "desc": "'Jupiter Ascending' - Andy Wachowski, Lana Wachowski"
+                    },
+                    {
+                        "title": "다큐멘터리",
+                        "desc": "'Jupiter: The Giant Planet' - National Geographic"
                     }
                 ]
             }
@@ -111,15 +399,15 @@
     },
     "SATURN": {
         "imgSrc": {
-            "pc": "assets/images/test.jpg",
-            "mo": "assets/images/test.jpg"
+            "pc": "assets/images/planets/saturn_img01.png",
+            "mo": "assets/images/planets/saturn_img01.png"
         },
         "titleContainer": {
-            "title": "금성",
+            "title": "토성",
             "subtitles": [
-                "Venus",
-                "金星",
-                "&#9792;"
+                "Saturn",
+                "土星",
+                "&#9796;"
             ]
         },
         "contents": [
@@ -128,11 +416,11 @@
                 "constentsList": [
                     {
                         "title": "반지름",
-                        "desc": "약 2,440 km (지구의 약 38%)"
+                        "desc": "약 58,232 km (지구의 약 914.0%)"
                     },
                     {
                         "title": "공전 주기",
-                        "desc": "약 88일"
+                        "desc": "약 10,759일 (약 29.46년)"
                     }
                 ]
             },
@@ -140,8 +428,20 @@
                 "contentsTitle": "이야깃거리",
                 "constentsList": [
                     {
-                        "title": "수성의 기온 변동",
-                        "desc": "수성은 태양에 가장 가까운 행성으로, 낮에는 표면 온도가 약 430도까지 올라가지만, 밤에는 영하 180도까지 떨어집니다. 이렇게 극단적인 온도 변동은 대기가 거의 없기 때문에 발생합니다."
+                        "title": "토성과 탄생",
+                        "desc": "태양계의 다른 행성과 마찬가지로 토성은 태양 성운에서 형성되었습니다. 약 45억 년 전 중력은 가스와 먼지를 끌어들여 토성을 형성했습니다. 토성은 약 40억 년 전에 태양에서 여섯 번째 행성의 현재 위치에 정착했습니다."
+                    },
+                    {
+                        "title": "토성과 표면",
+                        "desc": "토성에는 단단한 표면이 없습니다. 토성의 표면을 걷는다면 몸이 가라앉으면서 고온과 압력에 시달릴 것입니다. 행성의 표면은 대부분 소용돌이치는 가스입니다."
+                    },
+                    {
+                        "title": "토성과 위성",
+                        "desc": "토성은 태양계에서 가장 위성이 많은 행성으로 목성보다도 더 많은 위성을 가지고 있다 2019년 미국 연구원들은 토성을 돌고 있는 20개의 새로운 위성을 발견했습니다. 토성을 돌고 있는 자연 위성은 매우 다양하고 많습니다. 고리가 있는 토성과 그 주위를 돌고 있는 위성은 마치 태양계의 축소판이라고 할 수 있습니다."
+                    },
+                    {
+                        "title": "토성과 고리",
+                        "desc": "토성의 고리가 만들어진 기원에 대해서는 몇 가지 가설이 있습니다. 일부 천문학자들은 토성의 고리가 혜성, 소행성, 심지어 토성의 강력한 중력에 의해 찢어진 위성의 조각들이 갇혀서 고리를 형성한 것으로 생각하고 있습니다. 반면, 토성의 고리는 토성을 형성한 성운 물질의 잔해라고 가정하는 천문학자들도 있습니다."
                     }
                 ]
             },
@@ -150,15 +450,137 @@
                 "constentsList": [
                     {
                         "title": "서적",
-                        "desc": "'The Mercury 13: The True Story of Thirteen Women and the Dream of Space Flight' - Martha Ackmann"
+                        "desc": "'Saturn: A New View' - Laura Lovett"
                     },
                     {
                         "title": "영상",
-                        "desc": "'Messenger: Journey to Mercury' - NASA"
+                        "desc": "'The Rings of Saturn' - Charles Packard"
                     },
                     {
-                        "title": "영상",
-                        "desc": "'Mercury: The Story So Far' - BBC"
+                        "title": "다큐멘터리",
+                        "desc": "'Saturn: Lord of the Rings' - BBC"
+                    }
+                ]
+            }
+        ]
+    },
+    "URANUS": {
+        "imgSrc": {
+            "pc": "assets/images/planets/uranus_img01.png",
+            "mo": "assets/images/planets/uranus_img01.png"
+        },
+        "titleContainer": {
+            "title": "천왕성",
+            "subtitles": [
+                "Uranus",
+                "天王星",
+                "&#9797;"
+            ]
+        },
+        "contents": [
+            {
+                "contentsTitle": "정보",
+                "constentsList": [
+                    {
+                        "title": "반지름",
+                        "desc": "약 25,362 km (지구의 약 398.4%)"
+                    },
+                    {
+                        "title": "공전 주기",
+                        "desc": "약 30,687일 (약 84.01년)"
+                    }
+                ]
+            },
+            {
+                "contentsTitle": "이야깃거리",
+                "constentsList": [
+                    {
+                        "title": "천왕성과 다이아몬드 비",
+                        "desc": "천왕성의 핵에는 다이아몬드 비가 쏟아집니다. 천왕성의 중심 압력은 너무 강력하여 탄소 입자가 다이아몬드로 바뀌기 때문이랍니다."
+                    },
+                    {
+                        "title": "천왕성과 자전축",
+                        "desc": "천왕성은 97.77°로 기울어져 있는데 이는 그 자전축이 태양계의 평면과 거의 평행이라는 의미입니다. 천왕성은 태양계의 행성 중 가장 많이 기울어져 있는 행성입니다."
+                    },
+                    {
+                        "title": "천왕성과 기온",
+                        "desc": "천왕성은 태양에서 가장 멀리 떨어져 있는 행성이 아니지만, 태양계에서 가장 추운 행성입니다. 천왕성의 온도가 왜 그토록 낮은 지는 잘 알려져 있지 않습니다. 일부 과학자들은 그 이유가 자전축이 매우 기울어져 있기 때문이라고 합니다. 하지만, 대규모 충돌 후 천왕성의 내부 열이 대부분 사라지고 중심 온도가 고갈되었다고 주장하는 학자들도 있습니다."
+                    },
+                    {
+                        "title": "천왕성과 고리",
+                        "desc": "천왕성은 토성 다음으로 발견된 두 번째 고리 행성입니다. 토성에 이어 천왕성에서도 고리가 발견됨에 따라 천문학자들은 고리가 행성의 공통적인 특징이라는 것을 깨닫게 되었습니다."
+                    }
+                ]
+            },
+            {
+                "contentsTitle": "미디어",
+                "constentsList": [
+                    {
+                        "title": "서적",
+                        "desc": "'Uranus, Neptune, Pluto, and the Outer Solar System' - Linda T. Elkins-Tanton"
+                    },
+                    {
+                        "title": "다큐멘터리",
+                        "desc": "'Uranus & Neptune: Worlds Apart' - National Geographic"
+                    }
+                ]
+            }
+        ]
+    },
+    "NEPTUNE": {
+        "imgSrc": {
+            "pc": "assets/images/planets/neptune_img01.png",
+            "mo": "assets/images/planets/neptune_img01.png"
+        },
+        "titleContainer": {
+            "title": "해왕성",
+            "subtitles": [
+                "Neptune",
+                "海王星",
+                "&#9798;"
+            ]
+        },
+        "contents": [
+            {
+                "contentsTitle": "정보",
+                "constentsList": [
+                    {
+                        "title": "반지름",
+                        "desc": "약 24,622 km (지구의 약 396.1%)"
+                    },
+                    {
+                        "title": "공전 주기",
+                        "desc": "약 60,190일 (약 164.8년)"
+                    }
+                ]
+            },
+            {
+                "contentsTitle": "이야깃거리",
+                "constentsList": [
+                    {
+                        "title": "해왕성과 성분",
+                        "desc": "해왕성은 천왕성과 더불어 거대 얼음 행성으로 분류됩니다. 또한 거대 기체 행성이기도 한 해왕성은 거대 기체 행성 중에서 가장 밀도가 높습니다. 해왕성의 생성"
+                    },
+                    {
+                        "title": "해왕성과 대흑점",
+                        "desc": "1989년 보이저 2호가 통과할 당시 해왕성의 대흑점 은 해왕성의 남반구에서 발생한 거대한 폭풍인 것으로 확인되었습니다. 이 폭풍의 위력은 태양계 행성에서 기록된 바람 중에서 가장 강력했습니다. 이 대흑점은 1994년에 완전히 사라졌지만 2016년 해왕성의 북반구에 매우 유사한 흑점이 나타났습니다."
+                    },
+                    {
+                        "title": "해왕성과 색깔",
+                        "desc": "해왕성의 대기에 포함된 메탄은 태양의 붉은 빛을 흡수하고 푸른 빛을 우주로 반사시킵니다. 그 결과 해왕성은 선명한 파란색의 시원하고 차분한 외관을 가집니다. 최신 연구결과에서는 천왕성과 같은 색상을 띄고 있다는 것이 판명되었습니다."
+                    }
+                ]
+            },
+            {
+                "contentsTitle": "미디어",
+                "constentsList": [
+                    {
+                        "title": "서적",
+                        "desc": "'Neptune: The Planets, Book Eight' - Michael Carroll"
+                    },
+                    {
+                        "title": "다큐멘터리",
+                        "desc": "'Neptune: The Mystic' - BBC"
                     }
                 ]
             }

@@ -23,19 +23,27 @@ export class Orbit extends THREE.Line {
         for(let i = 0; i <= segments; i++){
             const angle = (i / segments) * (Math.PI * 2);
             vertexArr.push(
-                Math.cos(angle) * radius + oDistance.x,
+                Math.cos(angle) * radius,
                 0,
-                Math.sin(angle) * radius + oDistance.z
+                Math.sin(angle) * radius
             )
         }
 
         const material = new THREE.LineBasicMaterial({
-            color: config.orbitColor
+            color: config.orbitColor,
+            opacity: 0.15,
+            transparent: true,
         });
         
         const geometry = new THREE.BufferGeometry();
         geometry.setAttribute("position", new THREE.Float32BufferAttribute(vertexArr, 3));
 
         super(geometry, material);
+
+        this.position.set(
+            oDistance.x,
+            0,
+            oDistance.z
+        )
     }
 }

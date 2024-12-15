@@ -113,9 +113,9 @@ export class Space {
     this.sunGlow = new SunGlow(this);
     this.sunLight = new SunLight({
       color: 0xffffff,
-      intensity: 1000,
-      distance: 10000,
-      decay: 8.5,
+      intensity: 1,
+      distance: 0,
+      decay: 0,
     });
 
     this.planets = [];
@@ -128,15 +128,7 @@ export class Space {
     this.orbits = [];
 
     for (const key in orbitsConfig) {
-      const { radius, name, orbitColor } = orbitsConfig[key];
-
-      const orbitIns = new Orbit({
-        radius,
-        segments: 100,
-        name,
-        orbitColor,
-      });
-
+      const orbitIns = new Orbit(orbitsConfig[key]);
       this.orbits.push(orbitIns);
     }
 
