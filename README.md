@@ -39,4 +39,30 @@ npm start
 ```
 <br/>
 
-## 콘텐츠 소개   
+## 콘텐츠 소개
+### 기본 동작
+![ssfs_gif001](https://github.com/user-attachments/assets/38ce3a07-af43-4a14-8cf7-cd213dd2df75)
+<br/>
+행성을 클릭하면 해당 행성을 줌인하고 행성의 정보를 노출합니다. 행성만이 아니라 행성의 이름 등을 선택하여도 같은 결과를 확인할 수 있습니다.
+<br/>
+### 숏컷
+![ssfs_gif002](https://github.com/user-attachments/assets/b28b1102-f9a8-4f9a-a1a0-1bad0d6b029f)
+<br/>
+좌측 가운데의 슬라이드 버튼을 통해서 빠르게 행성에 접근할 수 있습니다.
+<br/>
+### 시점 조정
+![ssfs_gif003](https://github.com/user-attachments/assets/af39f0dd-0bd4-436b-a9f4-09e9dde55e2f)
+<br/>
+카메라가 틀어져서 초기화가 필요하거나 수평, 수직으로 보고 싶을 때, 좌측 하단 버튼을 통해서 시점 변경을 할 수 있습니다.
+<br/>
+<br/>
+
+## 자료 참조
+- 이미지 참조
+  - [NASA](https://www.nasa.gov/)
+- 텍스처 참조
+  - [solarsystemscope](https://www.solarsystemscope.com/)
+- 텍스트 내용 참조
+  - [starwalk](https://starwalk.space/ko)
+<br />
+본 사이트는 상업적 목적으로 제작된 사이트가 아닙니다.
