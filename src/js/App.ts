@@ -13,6 +13,14 @@ export default async function (){
                 introNode: document.querySelector("#intro")!,
                 loadingNode: document.querySelector("#loader")!,
                 pBtnWrapNode: document.querySelector("#p_btn_wrap")!,
+                sBtnNodes: {
+                    container: document.querySelector("#s_btn_wrap")!,
+                    slider: document.querySelector("#s_btn_wrap .swiper")!,
+                    nav: {
+                        prev: document.querySelector("#s_btn_wrap .s_btn_prev")!,
+                        next: document.querySelector("#s_btn_wrap .s_btn_next")!,
+                    }
+                },
                 headerNode: document.querySelector("header")!,
                 modalData
             }

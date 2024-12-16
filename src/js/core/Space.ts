@@ -14,6 +14,7 @@ import { Events } from "../utils/Events";
 import { GLTFLoader } from "three-stdlib";
 import { LoadHelper } from "../utils/Loader";
 import { SaturnRing } from "../scenes/models/SaturnRing";
+import { ShortCutBtn } from "./ShortCutBtn";
 
 interface SpaceConfigProps {
   canvas: HTMLCanvasElement;
@@ -21,6 +22,14 @@ interface SpaceConfigProps {
   modalNode: HTMLElement;
   modalData: Record<string, modalDataProps>;
   pBtnWrapNode: HTMLElement;
+  sBtnNodes: {
+    container: HTMLElement,
+    slider: HTMLElement,
+    nav: {
+        next: HTMLElement,
+        prev: HTMLElement,
+    }
+  };
   introNode: HTMLElement;
   loadingNode: HTMLElement;
   headerNode: HTMLElement;
@@ -38,10 +47,20 @@ export class Space {
   introNode: HTMLElement;
   loadingNode: HTMLElement;
   pBtnWrapNode: HTMLElement;
+  sBtnNodes: {
+    container: HTMLElement,
+    slider: HTMLElement,
+    nav: {
+        next: HTMLElement,
+        prev: HTMLElement,
+    }
+  };
   headerNode: HTMLElement;
 
   modal: Modal;
   modalData: Record<string, any>;
+
+  shortCutBtn: ShortCutBtn;
 
   loadingManager: THREE.LoadingManager;
   textureLoader: THREE.TextureLoader;
@@ -80,10 +99,13 @@ export class Space {
     this.introNode = config.introNode;
     this.loadingNode = config.loadingNode;
     this.pBtnWrapNode = config.pBtnWrapNode;
+    this.sBtnNodes = config.sBtnNodes;
     this.headerNode = config.headerNode;
 
     this.modalData = config.modalData;
     this.modal = new Modal(this, this.modalNode, this.modalData);
+
+    this.shortCutBtn = new ShortCutBtn(this);
 
     this.sizer = new Sizer();
     this.camera = new Camera(this, {});

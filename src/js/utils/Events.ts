@@ -73,6 +73,10 @@ export class Events {
     return this.space.satrunRing;
   }
 
+  get sBtnNodes() {
+    return this.space.sBtnNodes;
+  }
+
   constructor(space: Space) {
     this.space = space;
     this.isPlanetHide = false;
@@ -157,6 +161,14 @@ export class Events {
         "<"
       )
       .to(
+        this.sBtnNodes.container,
+        {
+          opacity: 1,
+          duration: 1.2,
+        },
+        "<"
+      )
+      .to(
         this.nameWrapNode,
         {
           opacity: 1,
@@ -171,7 +183,7 @@ export class Events {
 
             this.camera.handleLockControls(true);
             this.isCameraPointActive = false;
-            this.lockCameraPointBtn();
+            this.lockAllUtilsBtn();
           },
         },
         "<"
@@ -195,14 +207,14 @@ export class Events {
 
   handlePointerMove(
     e: PointerEvent,
-    isNameTag?: boolean,
+    isBtn?: boolean,
     nameVal?: string | undefined
   ) {
     if (!this.isStart || this.isModal || this.isCameraPointActive) return;
 
     let target;
 
-    if (isNameTag && nameVal) {
+    if (isBtn && nameVal) {
       target = this.planets.find((planet) => planet.name === nameVal);
     } else {
       target = this.getPointerTarget(e) as Planet;
@@ -240,14 +252,14 @@ export class Events {
 
   handlePointerDown(
     e: PointerEvent,
-    isNameTag?: boolean,
+    isBtn?: boolean,
     nameVal?: string | undefined
   ) {
     if (!this.isStart || this.isModal || this.isCameraPointActive) return;
 
     let target;
 
-    if (isNameTag && nameVal) {
+    if (isBtn && nameVal) {
       target = this.planets.find((planet) => planet.name === nameVal);
     } else {
       target = this.getPointerTarget(e) as Planet;
@@ -264,7 +276,7 @@ export class Events {
       });
 
       this.isCameraPointActive = true;
-      this.lockCameraPointBtn();
+      this.lockAllUtilsBtn();
 
       target.isActive = true;
       if (!target.visible) target.visible = true;
@@ -329,7 +341,7 @@ export class Events {
   resetCamera() {
     if (this.isCameraPointActive) return;
     this.lockControls();
-    this.lockCameraPointBtn();
+    this.lockAllUtilsBtn();
 
     const tl = gsap.timeline();
     const controlsAngle = {
@@ -381,7 +393,7 @@ export class Events {
             this.camera.handleLockControls(true);
 
             this.isCameraPointActive = false;
-            this.lockCameraPointBtn();
+            this.lockAllUtilsBtn();
           },
         },
         "<"
@@ -444,7 +456,7 @@ export class Events {
   setCameraVertical() {
     if (this.isCameraPointActive) return;
     this.lockControls();
-    this.lockCameraPointBtn();
+    this.lockAllUtilsBtn();
 
     const tl = gsap.timeline();
     const controlsAngle = {
@@ -463,7 +475,7 @@ export class Events {
       onComplete: () => {
         this.camera.handleLockControls(true);
         this.isCameraPointActive = false;
-        this.lockCameraPointBtn();
+        this.lockAllUtilsBtn();
       },
     });
   }
@@ -471,7 +483,7 @@ export class Events {
   setCamerHorizontal() {
     if (this.isCameraPointActive) return;
     this.lockControls();
-    this.lockCameraPointBtn();
+    this.lockAllUtilsBtn();
 
     const tl = gsap.timeline();
     const controlsAngle = {
@@ -508,7 +520,7 @@ export class Events {
           onComplete: () => {
             this.camera.handleLockControls(true);
             this.isCameraPointActive = false;
-            this.lockCameraPointBtn();
+            this.lockAllUtilsBtn();
           },
         },
         "<"
@@ -540,9 +552,12 @@ export class Events {
     }
   }
 
-  lockCameraPointBtn() {
+  lockAllUtilsBtn() {
     this.space.pBtnWrapNode.querySelectorAll("button").forEach((el) => {
       el.disabled = this.isCameraPointActive;
     });
+    this.space.sBtnNodes.slider.querySelectorAll("button").forEach(el => {
+      el.disabled = this.isCameraPointActive;
+    })
   }
 }
