@@ -19,7 +19,8 @@ export default defineConfig({
             `
           }
         }
-      }
+      },
+      base:"/ssfuns/"
     // css: {
     //     preprocessorOptions: {
     //         scss: {

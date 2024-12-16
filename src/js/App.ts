@@ -1,8 +1,8 @@
-import { getModalData } from "./constants/constants";
+import { BASE_URL, getModalData } from "./constants/constants";
 import { Space } from "./core/Space";
 
 export default async function (){
-    const modalData = await getModalData("../data/modalData.json");
+    const modalData = await getModalData(`${BASE_URL}/data/modalData.json`);
 
     if(modalData){
         const space = new Space(

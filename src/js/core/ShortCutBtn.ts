@@ -2,6 +2,7 @@ import Swiper from "swiper";
 import { Navigation } from "swiper/modules";
 import 'swiper/css';
 import { Space } from "./Space";
+import { BASE_URL } from "../constants/constants";
 
 export class ShortCutBtn {
   slider: Swiper;
@@ -40,7 +41,7 @@ export class ShortCutBtn {
       const btnNode = `
                 <button class="s_btn_trigger" data-planet="${key}">
                   <div class="symbol">
-                    <img src="/assets/images/symbols/symbols_${key}.svg"  alt="">
+                    <img src="${BASE_URL}/assets/images/symbols/symbols_${key}.svg"  alt="">
                   </div>
                   <p class="name">${title}</p>
                 </button>

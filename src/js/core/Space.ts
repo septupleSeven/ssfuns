@@ -8,7 +8,7 @@ import { Orbit } from "../scenes/models/Orbit";
 import { Planet } from "../scenes/models/Planet";
 import { SunLight } from "../scenes/tools/Sunlight";
 import { Composer } from "../utils/Composer";
-import { orbitsConfig, planetsConfig } from "../constants/constants";
+import { BASE_URL, orbitsConfig, planetsConfig } from "../constants/constants";
 import { Modal, modalDataProps } from "./Modal";
 import { Events } from "../utils/Events";
 import { GLTFLoader } from "three-stdlib";
@@ -115,13 +115,13 @@ export class Space {
     this.loadingManager = new LoadHelper(this);
 
     this.textureLoader = new THREE.TextureLoader(this.loadingManager).setPath(
-      "../../assets/textures/"
+      `${BASE_URL}/assets/textures/`
     );
     this.cubeTextureLoader = new THREE.CubeTextureLoader(this.loadingManager).setPath(
-      "../../assets/cubeMap/"
+      `${BASE_URL}/assets/cubemap/`
     );
     this.gltfLoader = new GLTFLoader(this.loadingManager).setPath(
-      "../../assets/models/"
+      `${BASE_URL}/assets/models/`
     );
 
     this.raycaster = new THREE.Raycaster();
