@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/favicon.ico" />
+  <title>StarLifecycle</title>
+  <script type="module" crossorigin src="/assets/index-B1IQTSQd.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-BNrTR1ni.css">
+</head>
+
+<body>
+  <header>
+    <a href="/" class="header_logo">
+      <figure class="title">
+        <img src="/assets/images/logo.svg" alt="">
+      </figure>
+    </a>
+  </header>
+
+  <main>
+    <div id="loader">
+      <div class="loader_wrap">
+        <div class="loader_contents"></div>
+        <p>Loading...</p>
+      </div>
+    </div>
+
+    <div id="intro">
+      <div class="title_container">
+        <figure class="title">
+          <img src="/assets/images/logo.svg" alt="">
+        </figure>
+        <p class="subtitle">Solar System's Fun Story</p>
+      </div>
+      <button>
+        클릭하여 시작
+        <span class="material-icons">
+          arrow_forward
+        </span>
+      </button>
+    </div>
+
+    <div id="name_wrap"></div>
+
+    <div id="app">
+      <canvas id="canvas"></canvas>
+    </div>
+
+    <div id="modal">
+      <button class="modal_close">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+
+    <div id="p_btn_wrap">
+      <button disabled data-point="refresh">
+        <span class="material-icons">sync</span>
+        <p class="tooltip">시점 초기화</p>
+      </button>
+      <button disabled data-point="vertical">
+        <figure>
+          <img src="/assets/images/p-vertical.svg" alt="">
+        </figure>
+        <p class="tooltip">수직으로 보기</p>
+      </button>
+      <button disabled data-point="horizontal">
+        <figure>
+          <img src="/assets/images/p-horizontal.svg" alt="">
+        </figure>
+        <p class="tooltip">수평으로 보기</p>
+      </button>
+    </div>
+
+    <div id="s_btn_wrap">
+      <button type="button" class="s_nav_btn s_btn_prev">
+        <span class="material-icons">
+          keyboard_arrow_up
+        </span>
+      </button>
+
+      <div class="s_btn_container">
+        <div class="swiper">
+          <div class="swiper-wrapper">
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="s_nav_btn s_btn_next">
+        <span class="material-icons">
+          keyboard_arrow_down
+        </span>
+      </button>
+    </div>
+  </main>
+
+</body>
+
+</html>
