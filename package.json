@@ -6,12 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "start": "vite preview"
   },
   "devDependencies": {
     "@eslint/js": "^9.16.0",
     "@types/three": "^0.170.0",
     "eslint": "^9.16.0",
+    "gh-pages": "^6.2.0",
     "globals": "^15.12.0",
     "typescript": "^5.2.2",
     "typescript-eslint": "^8.16.0",
