@@ -266,6 +266,8 @@ export class Events {
     }
 
     if (target && !target.isActive) {
+      target.isOrbitRevolution = false;
+
       this.modal.clearModalContents();
       this.modal.addModalContents(target.name);
 
@@ -429,13 +431,15 @@ export class Events {
       window.getComputedStyle(document.querySelector("body")!).fontSize
     );
 
+    const baseFontSize = window.innerWidth > 540 ? 1.5 : 1.25;
+
     const currentPosVal =
       this.camera.controls.getPolarAngle() > 1.2
         ? this.camera.position.z
         : this.camera.position.y;
 
     const calcedSize = Math.min(
-      bodyFontSize * 1.5,
+      bodyFontSize * baseFontSize,
       bodyFontSize * (Math.round(currentPosVal) / 2.2)
     );
 
