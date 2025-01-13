@@ -58,6 +58,8 @@ npm start
 <br/>
 
 ## 자료 참조
+- 아폴로상 모델 참조
+  - [sketchfab](https://skfb.ly/VOzu)
 - 이미지 참조
   - [NASA](https://www.nasa.gov/)
 - 텍스처 참조
