@@ -29,7 +29,7 @@ export class Camera extends THREE.PerspectiveCamera {
     this.layers.enable(this.config.layer!);
 
     this.position.y = 2.45;
-    
+
     this.addControls();
     this.addTControls();
   }
@@ -70,20 +70,22 @@ export class Camera extends THREE.PerspectiveCamera {
     this.controls.target.set(0, 0, 0);
     this.tControls.target.set(0, 0, 0);
   }
-  
+
+  introResize() {
+    this.aspect = this.sizer.width / this.sizer.height;
+    this.updateProjectionMatrix();
+    this.controls.target.set(0, 2.5, 0);
+    this.tControls.target.set(0, 2.5, 0);
+  }
+
   update() {
     this.controls.update();
     this.updateTControls();
   }
 
-  updateControlsAngle(
-    angle: {
-      polar?: number,
-      azimuthal?: number,
-    }
-  ){
-    if(angle.polar) this.controls.setPolarAngle(angle.polar);
-    if(angle.azimuthal) this.controls.setAzimuthalAngle(angle.azimuthal);
+  updateControlsAngle(angle: { polar?: number; azimuthal?: number }) {
+    if (angle.polar) this.controls.setPolarAngle(angle.polar);
+    if (angle.azimuthal) this.controls.setAzimuthalAngle(angle.azimuthal);
 
     this.controls.update();
   }
@@ -92,14 +94,13 @@ export class Camera extends THREE.PerspectiveCamera {
     this.tControls.target.set(
       this.controls.target.x,
       this.controls.target.y,
-      this.controls.target.z,
-    )
+      this.controls.target.z
+    );
     this.tControls.update();
   }
 
-  handleLockControls(isLock:boolean){
+  handleLockControls(isLock: boolean) {
     this.controls.enabled = isLock;
     this.tControls.enabled = isLock;
   }
-
 }

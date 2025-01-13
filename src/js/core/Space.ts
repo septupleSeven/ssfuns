@@ -23,12 +23,12 @@ interface SpaceConfigProps {
   modalData: Record<string, modalDataProps>;
   pBtnWrapNode: HTMLElement;
   sBtnNodes: {
-    container: HTMLElement,
-    slider: HTMLElement,
+    container: HTMLElement;
+    slider: HTMLElement;
     nav: {
-        next: HTMLElement,
-        prev: HTMLElement,
-    }
+      next: HTMLElement;
+      prev: HTMLElement;
+    };
   };
   introNode: HTMLElement;
   loadingNode: HTMLElement;
@@ -48,12 +48,12 @@ export class Space {
   loadingNode: HTMLElement;
   pBtnWrapNode: HTMLElement;
   sBtnNodes: {
-    container: HTMLElement,
-    slider: HTMLElement,
+    container: HTMLElement;
+    slider: HTMLElement;
     nav: {
-        next: HTMLElement,
-        prev: HTMLElement,
-    }
+      next: HTMLElement;
+      prev: HTMLElement;
+    };
   };
   headerNode: HTMLElement;
 
@@ -87,9 +87,7 @@ export class Space {
   isStart: boolean;
   isModal: boolean;
 
-  constructor(
-    config: SpaceConfigProps
-  ) {
+  constructor(config: SpaceConfigProps) {
     this.isStart = false;
     this.isModal = true;
 
@@ -117,9 +115,9 @@ export class Space {
     this.textureLoader = new THREE.TextureLoader(this.loadingManager).setPath(
       `${BASE_URL}/assets/textures/`
     );
-    this.cubeTextureLoader = new THREE.CubeTextureLoader(this.loadingManager).setPath(
-      `${BASE_URL}/assets/cubemap/`
-    );
+    this.cubeTextureLoader = new THREE.CubeTextureLoader(
+      this.loadingManager
+    ).setPath(`${BASE_URL}/assets/cubemap/`);
     this.gltfLoader = new GLTFLoader(this.loadingManager).setPath(
       `${BASE_URL}/assets/models/`
     );
@@ -131,7 +129,7 @@ export class Space {
 
     this.sun = new Sun(this, {
       rotation: 0.001,
-      planetRadius: 0.325
+      planetRadius: 0.325,
     });
     this.sunGlow = new SunGlow(this);
     this.sunLight = new SunLight({
@@ -169,14 +167,14 @@ export class Space {
       this.sunLight,
       ...this.orbits,
       ...this.planets,
-      this.satrunRing,
+      this.satrunRing
       // lightHelper,
     );
 
-    this.gltfLoader.load("apollo/scene.gltf", gltf => {
+    this.gltfLoader.load("apollo/scene.gltf", (gltf) => {
       this.apollo = gltf.scene;
       this.apollo.position.set(-0.015, 2.5, 0.2);
-      this.apollo.rotation.set(-Math.PI / 2, Math.PI / 1.5, 0)
+      this.apollo.rotation.set(-Math.PI / 2, Math.PI / 1.5, 0);
       this.apollo.scale.set(0.1, 0.1, 0.1);
       this.scene.add(this.apollo);
     });
@@ -190,7 +188,6 @@ export class Space {
       } else {
         this.events.handlePointerMove(e);
       }
-
     });
 
     window.addEventListener("pointerdown", (e) => {
@@ -200,37 +197,36 @@ export class Space {
       } else {
         this.events.handlePointerDown(e);
       }
-
     });
 
     window.addEventListener("wheel", () => {
       this.events.hidePlanets();
       this.events.handleTagSize();
-    })
+    });
 
     this.introNode.addEventListener("click", () => {
       this.events.startIntro();
     });
 
-    this.pBtnWrapNode.querySelectorAll("button").forEach(
-      el => {
-        const events = this.events;
+    this.pBtnWrapNode.querySelectorAll("button").forEach((el) => {
+      const events = this.events;
 
-        el.addEventListener("click", function(){
-          const thisPoint = this.dataset.point!;
-          events.handleCameraPoint(thisPoint);
-        })
-      }
-    )
-
+      el.addEventListener("click", function () {
+        const thisPoint = this.dataset.point!;
+        events.handleCameraPoint(thisPoint);
+      });
+    });
   }
 
   resize() {
-    if(this.isStart){
+    if (this.isStart) {
       this.camera.resize();
+    } else {
+      this.camera.introResize();
     }
     this.composer.resize();
     this.renderer.resize();
+    this.shortCutBtn.resize();
   }
 
   update() {
@@ -260,5 +256,4 @@ export class Space {
 
     this.scene.background = cubeTexture;
   }
-
 }
