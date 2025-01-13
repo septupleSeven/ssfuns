@@ -75,6 +75,10 @@ header {
         }
     }
 
+    &:focus {
+        outline: 1px solid #fff;
+    }
+
     button {
         display: flex;
         align-items: center;
@@ -86,6 +90,11 @@ header {
 
         span {
             transition: 0.4s;
+        }
+
+        &:focus {
+            outline: 1px solid #fff;
+            opacity: 1;
         }
     }
 
@@ -143,7 +152,7 @@ header {
     opacity: 0;
     z-index: 2;
 
-    span {
+    span, button {
         position: absolute;
         z-index: 5;
         color: #fff;
@@ -154,6 +163,11 @@ header {
         margin-top: 40px;
         margin-left: 40px;
         user-select: none;
+
+        &:focus {
+            outline: 1px solid #fff;
+        }
+
     }
 
 }
@@ -184,6 +198,10 @@ header {
 
     span {
         font-size: 30px;
+    }
+
+    &:focus{
+        outline: 1px solid #fff;
     }
 
 }
@@ -414,6 +432,11 @@ header {
 
         }
 
+        &:focus {
+            outline: 1px solid #fff;
+            opacity: 1;
+        }
+
         &:disabled {
             opacity: 0.2;
             filter: grayscale(1);
@@ -539,6 +562,10 @@ header {
 
         }
 
+        &:focus {
+            outline: 1px solid #fff;
+        }
+
     }
 
     .swiper {
@@ -595,6 +622,11 @@ header {
 
         &:hover {
             opacity: 1;
+        }
+
+        &:focus {
+            opacity: 1;
+            outline: 1px solid #fff;
         }
 
         &:disabled {

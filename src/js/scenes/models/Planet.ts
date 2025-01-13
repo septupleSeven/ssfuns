@@ -1,152 +1,148 @@
 import * as THREE from "three";
 import { Space } from "../../core/Space";
 
-interface PlanetConfigProps{
-    texture: string;
-    planetRadius: number;
-    name: string;
-    nameTag: string;
-    orbitRadius: number;
-    orbitColor?: THREE.ColorRepresentation;
-    orbitDistanceX?: number;
-    orbitDistanceZ?: number;
-    orbitSpeed?: number;
-    rotationAngle?: number;
-    rotationSpeed?: number;
-    layer?:number;
+interface PlanetConfigProps {
+  texture: string;
+  planetRadius: number;
+  name: string;
+  nameTag: string;
+  orbitRadius: number;
+  orbitColor?: THREE.ColorRepresentation;
+  orbitDistanceX?: number;
+  orbitDistanceZ?: number;
+  orbitSpeed?: number;
+  rotationAngle?: number;
+  rotationSpeed?: number;
+  layer?: number;
 }
 
 export class Planet extends THREE.Mesh {
-    space: Space;
-    config: PlanetConfigProps;
-    orbitAngle: number;
-    nameTag: HTMLElement;
-    isOrbitRevolution: boolean;
-    isActive: boolean;
+  space: Space;
+  config: PlanetConfigProps;
+  orbitAngle: number;
+  nameTag: HTMLElement;
+  isOrbitRevolution: boolean;
+  isActive: boolean;
 
-    constructor(space:Space, config:PlanetConfigProps) {
-        const material = new THREE.MeshPhongMaterial({
-            map: space.textureLoader.load(config.texture),
-        })
-        
-        const geometry = new THREE.SphereGeometry(config.planetRadius, 40, 40);
-        
-        super(geometry, material);
+  constructor(space: Space, config: PlanetConfigProps) {
+    const material = new THREE.MeshPhongMaterial({
+      map: space.textureLoader.load(config.texture),
+    });
 
-        // const axesHelper = new THREE.AxesHelper(1);
-        // this.add(axesHelper)
-        
-        this.orbitAngle = 0;
+    const geometry = new THREE.SphereGeometry(config.planetRadius, 40, 40);
 
-        this.space = space;
+    super(geometry, material);
 
-        this.config = {
-            ...config,
-            orbitColor: config.orbitColor ?? 0xffffff,
-            orbitDistanceX: config.orbitDistanceX ?? 0,
-            orbitDistanceZ: config.orbitDistanceZ ?? 0,
-            orbitSpeed: config.orbitSpeed ?? 0.001,
-            rotationAngle: config.rotationAngle ?? 0,
-            rotationSpeed: config.rotationSpeed ?? 0.001,
-            layer: config.layer ?? 7
-        };
-        
-        this.layers.set(this.config.layer!);
-        this.name = config.name;
+    // const axesHelper = new THREE.AxesHelper(1);
+    // this.add(axesHelper)
 
-        this.nameTag = this.createNameTag(
-            this.space.nameWrapNode,
-            this.config.nameTag
-        );
+    this.orbitAngle = 0;
 
-        this.isOrbitRevolution = true;
-        this.isActive = false;
+    this.space = space;
 
-        this.rotation.order = 'ZYX';
-        this.rotation.z = this.config.rotationAngle!;
+    this.config = {
+      ...config,
+      orbitColor: config.orbitColor ?? 0xffffff,
+      orbitDistanceX: config.orbitDistanceX ?? 0,
+      orbitDistanceZ: config.orbitDistanceZ ?? 0,
+      orbitSpeed: config.orbitSpeed ?? 0.001,
+      rotationAngle: config.rotationAngle ?? 0,
+      rotationSpeed: config.rotationSpeed ?? 0.001,
+      layer: config.layer ?? 7,
+    };
 
-        this.nameTag.addEventListener("pointerenter", e => {
-            const nameTag = e.target as HTMLElement;
-            this.space.events.handlePointerMove(e, true, nameTag.dataset.planet);
-        });
-        this.nameTag.addEventListener("pointerdown", e => {
-            const nameTag = e.target as HTMLElement;
-            this.space.events.handlePointerDown(e, true, nameTag.dataset.planet);
-        });
+    this.layers.set(this.config.layer!);
+    this.name = config.name;
+
+    this.nameTag = this.createNameTag(
+      this.space.nameWrapNode,
+      this.config.nameTag
+    );
+
+    this.isOrbitRevolution = true;
+    this.isActive = false;
+
+    this.rotation.order = "ZYX";
+    this.rotation.z = this.config.rotationAngle!;
+
+    this.nameTag.addEventListener("pointerenter", (e) => {
+      const nameTag = e.target as HTMLElement;
+      this.space.events.handlePointerMove(e, true, nameTag.dataset.planet);
+    });
+    this.nameTag.addEventListener("pointerdown", (e) => {
+      const nameTag = e.target as HTMLElement;
+      this.space.events.handlePointerDown(e, true, nameTag.dataset.planet);
+    });
+  }
+
+  update() {
+    if (this.isOrbitRevolution) {
+      this.orbitAngle -= this.config.orbitSpeed!;
     }
 
-    update(){
-        if(this.isOrbitRevolution){
-            this.orbitAngle -= this.config.orbitSpeed!;
-        }
+    this.position.x =
+      Math.cos(this.orbitAngle) * this.config.orbitRadius +
+      this.config.orbitDistanceX!;
+    this.position.z =
+      Math.sin(this.orbitAngle) * this.config.orbitRadius +
+      this.config.orbitDistanceZ!;
 
-        this.position.x = Math.cos(this.orbitAngle) * this.config.orbitRadius + this.config.orbitDistanceX!;
-        this.position.z = Math.sin(this.orbitAngle) * this.config.orbitRadius + this.config.orbitDistanceZ!;
+    this.rotation.y += this.config.rotationSpeed!;
 
-        this.rotation.y += this.config.rotationSpeed!;
+    if (this.isPlanetVisible()) {
+      if (this.nameTag.style.display !== "block") {
+        this.nameTag.style.display = "block";
+      }
 
-        if(this.isPlanetVisible()){
-
-            if(this.nameTag.style.display !== "block"){
-                this.nameTag.style.display = "block";
-            }
-
-            const NDCPos = this.getNDC();
-            this.setNameTagPos(NDCPos);
-        }else{
-            this.nameTag.style.display = "none";
-        }
-
+      const NDCPos = this.getNDC();
+      this.setNameTagPos(NDCPos);
+    } else {
+      this.nameTag.style.display = "none";
     }
+  }
 
-    getNDC(){
-        const vector = this.position.clone().project(this.space.camera);
+  getNDC() {
+    const vector = this.position.clone().project(this.space.camera);
 
-        const cWidthHalf = this.space.canvas.clientWidth / 2;
-        const cHeightHalf = this.space.canvas.clientHeight / 2;
+    const cWidthHalf = this.space.canvas.clientWidth / 2;
+    const cHeightHalf = this.space.canvas.clientHeight / 2;
 
-        return {
-            x: (vector.x * cWidthHalf) + cWidthHalf,
-            y: (vector.y * cHeightHalf) + cHeightHalf,
-        }
-    }
+    return {
+      x: vector.x * cWidthHalf + cWidthHalf,
+      y: vector.y * cHeightHalf + cHeightHalf,
+    };
+  }
 
-    createNameTag(
-        wrapper: HTMLElement,
-        nameVal: string
-    ){
-        const nameTag = document.createElement("span");
-        nameTag.dataset.planet = this.name;
-        nameTag.innerText = nameVal;
-        
-        wrapper.appendChild(nameTag);
+  createNameTag(wrapper: HTMLElement, nameVal: string) {
+    const nameTag = document.createElement("button");
+    nameTag.dataset.planet = this.name;
+    nameTag.innerText = nameVal;
 
-        return nameTag;
-    }
+    wrapper.appendChild(nameTag);
 
-    setNameTagPos(
-        NDCPos: {
-            x: number,
-            y: number
-        }
-    ){
-        this.nameTag.style.transform = `translate(${NDCPos.x}px, ${-NDCPos.y + this.space.canvas.clientHeight}px)`;
-    }
+    return nameTag;
+  }
 
-    isPlanetVisible(){
-        const frustum = new THREE.Frustum();
-        const matrix = new THREE.Matrix4();
+  setNameTagPos(NDCPos: { x: number; y: number }) {
+    this.nameTag.style.transform = `translate(${NDCPos.x}px, ${
+      -NDCPos.y + this.space.canvas.clientHeight
+    }px)`;
+  }
 
-        this.space.camera.updateMatrixWorld();
-        this.space.camera.updateProjectionMatrix();
+  isPlanetVisible() {
+    const frustum = new THREE.Frustum();
+    const matrix = new THREE.Matrix4();
 
-        matrix.multiplyMatrices(
-            this.space.camera.projectionMatrix,
-            this.space.camera.matrixWorldInverse,
-        );
+    this.space.camera.updateMatrixWorld();
+    this.space.camera.updateProjectionMatrix();
 
-        frustum.setFromProjectionMatrix(matrix);
+    matrix.multiplyMatrices(
+      this.space.camera.projectionMatrix,
+      this.space.camera.matrixWorldInverse
+    );
 
-        return frustum.intersectsObject(this);
-    }
+    frustum.setFromProjectionMatrix(matrix);
+
+    return frustum.intersectsObject(this);
+  }
 }

@@ -130,12 +130,6 @@ export class ShortCutBtn {
 
     this.calcContainerHeight();
 
-    // if (window.innerHeight <= 540) {
-    //   this.calcContainerWidth();
-    // } else {
-    //   this.calcContainerHeight();
-    // }
-
     if (this.slider) {
       this.slider!.params.slidesPerView = this.perView;
       this.slider!.update();
@@ -143,41 +137,4 @@ export class ShortCutBtn {
 
     this.isRes = false;
   }
-
-  // resize() {
-  //   if (this.isRes) return;
-
-  //   this.isRes = true;
-
-  //   let newDir: "horizontal" | "vertical" | undefined;
-  //   let newPerView: number;
-
-  //   if (window.innerHeight <= 540) {
-  //     newDir = "horizontal";
-  //     newPerView = 2;
-  //   } else {
-  //     newDir = "vertical";
-  //     newPerView = 3;
-  //   }
-
-  //   if (this.direction === newDir && this.perView === newPerView) {
-  //     this.isRes = false;
-  //     return;
-  //   }
-
-  //   this.slider?.destroy(true, true);
-
-  //   this.direction = newDir;
-  //   this.perView = newPerView;
-
-  //   if (window.innerHeight <= 768) {
-  //     this.calcContainerWidth();
-  //   } else {
-  //     this.calcContainerHeight();
-  //   }
-
-  //   this.init();
-
-  //   this.isRes = false;
-  // }
 }

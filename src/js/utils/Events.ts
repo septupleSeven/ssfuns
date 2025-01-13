@@ -225,11 +225,9 @@ export class Events {
       document.body.style.cursor = "pointer";
       target.isOrbitRevolution = false;
 
-      this.nameWrapNode.querySelectorAll("span").forEach(
-        el => {
-          if(target.name !== el.dataset.planet) el.style.opacity = "0.4";
-        }
-      );
+      this.nameWrapNode.querySelectorAll("span").forEach((el) => {
+        if (target.name !== el.dataset.planet) el.style.opacity = "0.4";
+      });
 
       if (target.name === "SATURN") this.satrunRing.isOrbitRevolution = false;
     } else {
@@ -240,11 +238,9 @@ export class Events {
 
       if (!this.satrunRing.isActive) this.satrunRing.isOrbitRevolution = true;
 
-      this.nameWrapNode.querySelectorAll("span").forEach(
-        el => {
-          el.style.opacity = "1";
-        }
-      );
+      this.nameWrapNode.querySelectorAll("span").forEach((el) => {
+        el.style.opacity = "1";
+      });
 
       document.body.style.cursor = "auto";
     }
@@ -560,8 +556,8 @@ export class Events {
     this.space.pBtnWrapNode.querySelectorAll("button").forEach((el) => {
       el.disabled = this.isCameraPointActive;
     });
-    this.space.sBtnNodes.slider.querySelectorAll("button").forEach(el => {
+    this.space.sBtnNodes.slider.querySelectorAll("button").forEach((el) => {
       el.disabled = this.isCameraPointActive;
-    })
+    });
   }
 }
