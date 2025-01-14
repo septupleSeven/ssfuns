@@ -69,9 +69,12 @@ export class ShortCutBtn {
 
   addEvents() {
     const btns = this.space.sBtnNodes.slider.querySelectorAll("button");
-
     btns.forEach((btn) => {
-      btn.addEventListener("pointerdown", (e) => {
+      btn.addEventListener("pointerenter", (e) => {
+        const nameTag = e.target as HTMLElement;
+        this.space.events.handlePointerMove(e, true, nameTag.dataset.planet);
+      });
+      btn.addEventListener("click", (e) => {
         const targetBtn = e.target as HTMLElement;
         this.space.events.handlePointerDown(e, true, targetBtn.dataset.planet);
       });

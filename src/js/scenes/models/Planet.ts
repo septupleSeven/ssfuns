@@ -69,7 +69,7 @@ export class Planet extends THREE.Mesh {
       const nameTag = e.target as HTMLElement;
       this.space.events.handlePointerMove(e, true, nameTag.dataset.planet);
     });
-    this.nameTag.addEventListener("pointerdown", (e) => {
+    this.nameTag.addEventListener("click", (e) => {
       const nameTag = e.target as HTMLElement;
       this.space.events.handlePointerDown(e, true, nameTag.dataset.planet);
     });
