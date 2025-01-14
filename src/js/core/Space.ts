@@ -15,6 +15,7 @@ import { GLTFLoader } from "three-stdlib";
 import { LoadHelper } from "../utils/Loader";
 import { SaturnRing } from "../scenes/models/SaturnRing";
 import { ShortCutBtn } from "./ShortCutBtn";
+import { AController } from "./AController";
 
 interface SpaceConfigProps {
   canvas: HTMLCanvasElement;
@@ -33,6 +34,7 @@ interface SpaceConfigProps {
   introNode: HTMLElement;
   loadingNode: HTMLElement;
   headerNode: HTMLElement;
+  aControllerNode: HTMLElement;
 }
 
 export class Space {
@@ -56,11 +58,14 @@ export class Space {
     };
   };
   headerNode: HTMLElement;
+  aControllerNode: HTMLElement;
 
   modal: Modal;
   modalData: Record<string, any>;
 
   shortCutBtn: ShortCutBtn;
+
+  aController: AController;
 
   loadingManager: THREE.LoadingManager;
   textureLoader: THREE.TextureLoader;
@@ -99,11 +104,14 @@ export class Space {
     this.pBtnWrapNode = config.pBtnWrapNode;
     this.sBtnNodes = config.sBtnNodes;
     this.headerNode = config.headerNode;
+    this.aControllerNode = config.aControllerNode;
 
     this.modalData = config.modalData;
     this.modal = new Modal(this, this.modalNode, this.modalData);
 
     this.shortCutBtn = new ShortCutBtn(this);
+
+    this.aController = new AController(this);
 
     this.sizer = new Sizer();
     this.camera = new Camera(this, {});
@@ -226,7 +234,7 @@ export class Space {
     }
     this.composer.resize();
     this.renderer.resize();
-    // this.shortCutBtn.resize();
+    this.shortCutBtn.resize();
   }
 
   update() {

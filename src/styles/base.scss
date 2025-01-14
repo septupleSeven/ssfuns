@@ -176,7 +176,7 @@ header {
     position: fixed;
     top: 0;
     right: 0;
-    z-index: 7;
+    z-index: 8;
     background: rgb(17, 17, 17);
     background: -moz-linear-gradient(90deg, rgba(17, 17, 17, 1) 0%, rgba(41, 41, 53, 0.8) 40%, rgba(66, 66, 91, 1) 90%);
     background: -webkit-linear-gradient(90deg, rgba(17, 17, 17, 1) 0%, rgba(41, 41, 53, 0.8) 40%, rgba(66, 66, 91, 1) 90%);
@@ -372,6 +372,9 @@ header {
     // overflow-y: hidden;
     opacity: 0;
     transition: opacity 0.4s;
+    max-width: 45px;
+    width: 100%;
+    display: none;
 
     button {
         max-width: 45px;
@@ -382,7 +385,7 @@ header {
         justify-content: center;
         align-items: center;
         transition: 0.4s;
-        padding: 8px;
+        padding: 10px;
         position: relative;
 
         &:not(:last-child)::after {
@@ -402,7 +405,7 @@ header {
             justify-content: center;
             align-items: center;
             width: 100%;
-            font-size: 1.875rem;
+            font-size: 1.75rem;
             color: $color-primary;
             user-select: none;
         }
@@ -501,6 +504,7 @@ header {
     row-gap: 10px;
     opacity: 0;
     transition: opacity 0.4s;
+    display: none;
 
     .s_btn_container {
         width: 100%;
@@ -638,6 +642,129 @@ header {
 
 }
 
+#a_controller_wrap {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translate(-50%, calc(100% + 20px));
+    z-index: 7;
+    max-width: 250px;
+    width: 100%;
+    padding: 10px 0;
+    border: 1px solid rgba($color: $color-primary, $alpha: 1);
+    background-color: rgba($color: #000000, $alpha: 0.6);
+    border-radius: 5px;
+    opacity: 0;
+    display: none;
+
+    &.active{
+        .open_btn{
+            transform: translate(-50%, calc(-100% - 20px)) rotate(45deg);
+            opacity: 1;
+            background-color: rgba($color: #000000, $alpha: 1);
+            border: 1px solid rgba($color: $color-primary, $alpha: 1);
+        }
+    }
+
+    .open_btn{
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, calc(-100% - 20px));
+        z-index: 2;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 35px;
+        height: 35px;
+        transition: 0.4s;
+        opacity: 0.4;
+        background-color: rgba($color: #000000, $alpha: 0.6);
+        border: 1px solid rgba($color: $color-primary, $alpha: 0.2);
+        color: #fff;
+
+        &:hover {
+            background-color: #222;
+            opacity: 1;
+
+            .tooltip {
+                transform: translate(calc(100% + 10px), -50%);
+                opacity: 1;
+            }
+
+        }
+
+        &:disabled {
+            opacity: 0.2;
+            filter: grayscale(1);
+        }
+    }
+
+    .a_controller{
+        color: #fff;
+        position: relative;
+        max-width: 120px;
+        width: 100%;
+        height: 120px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        button {
+            &:focus{
+                outline: 1px solid #fff;
+            }
+        }
+
+        .wrapper{
+            position: absolute;
+            display: flex;
+            justify-content: space-between;
+
+            &.vertical{
+                padding: 10px 0;
+                height: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                flex-direction: column;
+            }
+
+            &.horizontal{
+                padding: 0 10px;
+                width: 100%;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            button {
+                width: 30px;
+                height: 30px;
+                border: 1px solid rgba($color: $color-primary, $alpha: 1);
+                background-color: rgba($color: #ffffff, $alpha: 0.2);
+                border-radius: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                display: none;
+
+                &:active {
+                    background-color: rgba($color: #000000, $alpha: 1);
+                }
+
+                span{
+                    pointer-events: none;
+                }
+
+            }
+
+        }
+
+    }
+
+}
+
 @media screen and (max-width: 768px) {
 
     #modal {
@@ -700,6 +827,7 @@ header {
     }
 
     #p_btn_wrap {
+        max-width: 35px;
     
         button {
             max-width: 35px;
@@ -780,6 +908,27 @@ header {
         }
     
     }
+
+    #a_controller_wrap {
+        max-width: 130px;
+        padding: 5px 0;
+    
+        .a_controller{
+            max-width: 110px;
+            height: 110px;
+
+            .wrapper{
+    
+                button {
+                    width: 28px;
+                    height: 28px;
+                }
+    
+            }
+    
+        }
+    
+    }
     
 }
 
@@ -798,6 +947,8 @@ header {
     }
 
     #p_btn_wrap {
+        max-width: none;
+        width: auto;
         bottom: 40px;
         flex-direction: row;
     
@@ -846,6 +997,27 @@ header {
 
         span {
             font-size: 26px;
+        }
+    
+    }
+
+    #a_controller_wrap {
+        max-width: 120px;
+            
+        .a_controller{
+            max-width: 100px;
+            height: 100px;
+
+            .wrapper{
+    
+                button {
+                    width: 25px;
+                    height: 25px;
+                    font-size: .75rem;
+                }
+    
+            }
+    
         }
     
     }

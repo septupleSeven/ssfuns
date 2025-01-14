@@ -24,6 +24,10 @@
       <div class="loader_wrap">
         <div class="loader_contents"></div>
         <p>Loading...</p>
+        <p id="loder_progress">
+          <span class="current">0</span> /
+          <span class="total">전체 파일 계산중</span>
+        </p>
       </div>
     </div>
 
@@ -92,6 +96,27 @@
         </figure>
         <p class="tooltip">수평으로 보기</p>
       </button>
+    </div>
+
+    <div id="a_controller_wrap">
+
+      <button class="open_btn" id="a_controller_open_btn">
+        <span class="material-icons">
+          add
+        </span>
+      </button>
+
+      <div class="a_controller">
+        <div class="wrapper vertical">
+          <button data-dir="UP"><span class="material-icons">keyboard_arrow_up</span></button>
+          <button data-dir="BOTTOM"><span class="material-icons">keyboard_arrow_down</span></button>
+        </div>
+        <div class="wrapper horizontal">
+          <button data-dir="LEFT"><span class="material-icons">keyboard_arrow_left</span></button>
+          <button data-dir="RIGHT"><span class="material-icons">keyboard_arrow_right</span></button>
+        </div>
+      </div>
+
     </div>
   </main>
 

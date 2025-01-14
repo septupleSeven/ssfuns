@@ -48,6 +48,9 @@ export class Camera extends THREE.PerspectiveCamera {
 
     this.controls.autoRotate = true;
     this.controls.enabled = false;
+
+    // this.controls.enablePan = true;
+    this.controls.listenToKeyEvents(document.body);
   }
 
   addTControls() {

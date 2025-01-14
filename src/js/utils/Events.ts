@@ -77,6 +77,14 @@ export class Events {
     return this.space.sBtnNodes;
   }
 
+  get aController() {
+    return this.space.aController;
+  }
+
+  get aControllerNode() {
+    return this.space.aControllerNode;
+  }
+
   constructor(space: Space) {
     this.space = space;
     this.isPlanetHide = false;
@@ -157,6 +165,9 @@ export class Events {
         {
           opacity: 1,
           duration: 1.2,
+          onStart: () => {
+            this.pBtnWrapNode.style.display = "flex";
+          },
         },
         "<"
       )
@@ -165,6 +176,20 @@ export class Events {
         {
           opacity: 1,
           duration: 1.2,
+          onStart: () => {
+            this.sBtnNodes.container.style.display = "flex";
+          },
+        },
+        "<"
+      )
+      .to(
+        this.aControllerNode,
+        {
+          opacity: 1,
+          duration: 1.2,
+          onStart: () => {
+            this.aControllerNode.style.display = "block";
+          },
         },
         "<"
       )
@@ -558,6 +583,13 @@ export class Events {
     });
     this.space.sBtnNodes.slider.querySelectorAll("button").forEach((el) => {
       el.disabled = this.isCameraPointActive;
+    });
+    this.space.aControllerNode.querySelectorAll("button").forEach((el) => {
+      el.disabled = this.isCameraPointActive;
+
+      if (this.isCameraPointActive) {
+        this.aController.handleClose();
+      }
     });
   }
 }
