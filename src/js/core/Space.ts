@@ -198,14 +198,14 @@ export class Space {
       }
     });
 
-    // window.addEventListener("pointerdown", (e) => {
-    //   const nameTag = e.target as HTMLElement;
-    //   if (nameTag && nameTag.dataset.planet) {
-    //     this.events.handlePointerDown(e, true, nameTag.dataset.planet);
-    //   } else {
-    //     this.events.handlePointerDown(e);
-    //   }
-    // });
+    window.addEventListener("pointerdown", (e) => {
+      const nameTag = e.target as HTMLElement;
+      if (nameTag && nameTag.dataset.planet) {
+        this.events.handlePointerDown(e, true, nameTag.dataset.planet);
+      } else {
+        this.events.handlePointerDown(e);
+      }
+    });
 
     window.addEventListener("wheel", () => {
       this.events.hidePlanets();
