@@ -177,7 +177,7 @@ export class Events {
           opacity: 1,
           duration: 1.2,
           onStart: () => {
-            this.sBtnNodes.container.style.display = "flex";
+            this.sBtnNodes.container.style.zIndex = "7";
           },
         },
         "<"
