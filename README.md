@@ -13,6 +13,12 @@ Three.js를 활용하여 태양계를 구현하고 태양을 포함한 각 행�
 [https://septupleseven.github.io/ssfuns/]: https://septupleseven.github.io/ssfuns/
 <br/>
 
+### 관련 상세 노션
+- [https://www.notion.so/SSFS-15e675d69a94809395eee903de84183d?pvs=4][]
+
+[https://www.notion.so/SSFS-15e675d69a94809395eee903de84183d?pvs=4]: https://www.notion.so/SSFS-15e675d69a94809395eee903de84183d?pvs=4
+<br/>
+
 ## STACKS   
 ### Base
 - Three.js
@@ -56,6 +62,12 @@ npm start
 카메라가 틀어져서 초기화가 필요하거나 수평, 수직으로 보고 싶을 때, 좌측 하단 버튼을 통해서 시점 변경을 할 수 있습니다.
 <br/>
 <br/>
+### 반응형
+![ssfs_mo001](https://github.com/user-attachments/assets/980d7a07-c5dd-4dbc-8d13-3f62ded2fb40)
+![ssfs_mo002](https://github.com/user-attachments/assets/e010cd5f-2e79-43f0-84dc-fac933495e42)
+
+<br/>
+반응형 레이아웃이 적용되어 있습니다. 원활한 진행은 데스크탑 환경에서 진행하는 것을 권장드립니다.
 
 ## 자료 참조
 - 아폴로상 모델 참조
