@@ -7,7 +7,7 @@ const app = async () => {
 };
 
 if (WebGL.isWebGL2Available()) {
-  await app();
+  app();
 } else {
   const errorScreen = new ErrorScreen();
   errorScreen.removeContents();
