@@ -66,7 +66,7 @@ export class AController {
         opacity: 0,
         onComplete: () => {
           this.isOpen = false;
-          this.camera.controls.enablePan = false;
+          // this.camera.controls.enablePan = false;
           this.openBtn.disabled = false;
           this.space.aControllerNode.classList.remove("active");
         },
@@ -92,7 +92,7 @@ export class AController {
         y: 0,
         onComplete: () => {
           this.isOpen = true;
-          this.camera.controls.enablePan = true;
+          // this.camera.controls.enablePan = true;
           this.openBtn.disabled = false;
           this.space.aControllerNode.classList.add("active");
         },
@@ -132,7 +132,7 @@ export class AController {
         opacity: 0,
         onComplete: () => {
           this.isOpen = false;
-          this.camera.controls.enablePan = false;
+          // this.camera.controls.enablePan = false;
           this.openBtn.disabled = false;
           this.space.aControllerNode.classList.remove("active");
         },

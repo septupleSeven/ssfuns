@@ -121,7 +121,7 @@ export class Space {
     this.loadingManager = new LoadHelper(this);
 
     this.textureLoader = new THREE.TextureLoader(this.loadingManager).setPath(
-      `${BASE_URL}/assets/textures/`
+      `${BASE_URL}/assets/textures/low/`
     );
     this.cubeTextureLoader = new THREE.CubeTextureLoader(
       this.loadingManager

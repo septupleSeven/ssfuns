@@ -3,15 +3,13 @@ import App from "./js/App";
 import { ErrorScreen } from "./js/utils/ErrorScreen";
 
 const app = async () => {
-    await App();
-}
+  await App();
+};
 
-if(
-    WebGL.isWebGL2Available()
-){
-    app();
-}else{
-    const errorScreen = new ErrorScreen();
-    errorScreen.removeContents();
-    errorScreen.showErrorScreen();
+if (WebGL.isWebGL2Available()) {
+  await app();
+} else {
+  const errorScreen = new ErrorScreen();
+  errorScreen.removeContents();
+  errorScreen.showErrorScreen();
 }
